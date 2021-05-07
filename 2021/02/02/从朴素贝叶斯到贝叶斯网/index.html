@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/images/Bayesian/图二.PNG">
 <meta property="og:image" content="http://example.com/images/Bayesian/图三.PNG">
 <meta property="article:published_time" content="2021-02-02T13:00:15.000Z">
-<meta property="article:modified_time" content="2021-02-02T14:27:45.037Z">
+<meta property="article:modified_time" content="2021-05-07T08:11:30.478Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="机器学习-Machine Learning">
 <meta name="twitter:card" content="summary">
@@ -201,10 +201,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-02 21:00:15 / Modified: 22:27:45" itemprop="dateCreated datePublished" datetime="2021-02-02T21:00:15+08:00">2021-02-02</time>
+              <time title="Created: 2021-02-02 21:00:15" itemprop="dateCreated datePublished" datetime="2021-02-02T21:00:15+08:00">2021-02-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-07 16:11:30" itemprop="dateModified" datetime="2021-05-07T16:11:30+08:00">2021-05-07</time>
+              </span>
 
           
   
@@ -262,7 +268,7 @@ P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c,parent))}</script><p>更多
 <p><strong>AODE</strong>其实就是把每个特征都当一次超父，并求和，具体的公式就不再展示了。</p>
 <h3 id="TAN"><a href="#TAN" class="headerlink" title="TAN"></a>TAN</h3><p><strong>TAN</strong>的思想就不再局限于只有一个爹，而是通过以条件互信息（<em>conditional mutual information</em>）作为图的边的权重，构建一个最大带权生成树，如图三</p>
 <p><img src="\images\Bayesian\图三.PNG" alt="图三"></p>
-<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p>上面的贝叶斯分类器最终的目标其实还是实现分类，即比较$P(c|x_1,x_2,…)$的大小。而到了贝叶斯网络，目标变成了<strong>推断</strong>。即令$\bold {Q}={Q_1,Q_2…}$ 表示待查询变量，$\bold {E}=E_1,E_2,…$为证据变量，目标是计算后验概率$P(\bold Q=\bold q | \bold E = \bold e)$ 。一般使用而我们其实可以通过（*）式得到$P(Q_i|\bold Z)$的值，$\bold Z = \bold Q \cup \bold E /Q_i$（先用CPT连乘起来，即算出来所有的联合概率密度，再计算不在$\bold Z$中的特征的边缘分布以及将$\bold Z$中的值带入到CPT中查表）。具体的代码实现等有时间再完善。</p>
+<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p>上面的贝叶斯分类器最终的目标其实还是实现分类，即比较$P(c|x_1,x_2,…)$的大小。而到了贝叶斯网络，目标变成了<strong>推断</strong>。即令$\textbf{Q}={Q_1,Q_2…}$ 表示待查询变量，$\textbf{E}=E_1,E_2,…$为证据变量，目标是计算后验概率$P(\textbf{Q}=\textbf{q} | \textbf{E} = \textbf{e})$ 。一般使用而我们其实可以通过（*）式得到$P(Q_i|\textbf Z)$的值，$\textbf Z = \textbf Q \cup \textbf E /Q_i$（先用CPT连乘起来，即算出来所有的联合概率密度，再计算不在$\textbf Z$中的特征的边缘分布以及将$\textbf Z$中的值带入到CPT中查表）。具体的代码实现等有时间再完善。</p>
 <p>关于贝叶斯网络的例子，可以看：</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zdy0_2004/article/details/41096141">https://blog.csdn.net/zdy0_2004/article/details/41096141</a></p>
