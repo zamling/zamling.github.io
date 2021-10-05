@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/transformer/图一.jpg">
 <meta property="article:published_time" content="2021-09-14T07:04:28.000Z">
-<meta property="article:modified_time" content="2021-09-14T13:06:48.875Z">
+<meta property="article:modified_time" content="2021-10-05T04:19:52.000Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -204,10 +204,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-09-14 15:04:28 / Modified: 21:06:48" itemprop="dateCreated datePublished" datetime="2021-09-14T15:04:28+08:00">2021-09-14</time>
+              <time title="Created: 2021-09-14 15:04:28" itemprop="dateCreated datePublished" datetime="2021-09-14T15:04:28+08:00">2021-09-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-05 12:19:52" itemprop="dateModified" datetime="2021-10-05T12:19:52+08:00">2021-10-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,7 +259,61 @@
 </ul>
 <p>注意力机制的提出（Attention mechanisms）无视了其在输入，输出中的距离（用一个注意力权重连接输入输出）。但要注意的是，传统的注意力机制仍没有绕开需要使用RNN的情况（Attetion mechanism is just a bridge between two RNNs）。Transformer就是设计了一种舍弃RNN的Attention机制</p>
 <p><img src="\images\transformer\图一.jpg" alt="图一"></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Transformer相较于其他旨在减少序列形式的计算的优点：</p>
+<ul>
+<li>有一个常数值的运算量（相较于其他网络运算量和位置信息有关）</li>
+<li>实现上述功能所需的代价为由于平均注意力加权而降低了有效的resolution，这个将用Multi-Head Attention进行优化</li>
+</ul>
+<p><strong>Definition of Self-attention</strong>：将同一个序列的不同位置进行注意力的计算，得到context</p>
+<p><strong>End-to-end memory networks </strong>：基于循环的注意力机制而非传统的序列匹配的</p>
+<h1 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h1><h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>每层由一个multi-head self-attention mechanism和一个position-wise fully connected feed-forward network组成。且每一个都采用residual的思想以减少网络深度对模型的负优化。</p>
+<h3 id="Attention（self-attention）"><a href="#Attention（self-attention）" class="headerlink" title="Attention（self-attention）"></a>Attention（self-attention）</h3><p>这里提到的query, key and value概念从推荐系统过来的，可解释为</p>
+<p>eg：在电影推荐中，query 是某个人对电影的喜好信息（比如兴趣点、年龄、性别等）、key 是电影的类型（喜剧、年代等）、value 就是待推荐的电影。即根据query（个人信息）和key（电影信息）输出这个人爱看的电影。在Transformer中</p>
+<ul>
+<li>query：$Q = X \cdot W^Q$</li>
+<li>Key: $K=X \cdot W^K$</li>
+<li>value: $V=X \cdot W^V$</li>
+</ul>
+<p>即模拟推荐算法，计算query和key的相似度作为value的权重，作用使用这个权重进行value求和</p>
+<h4 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled Dot-Product Attention"></a>Scaled Dot-Product Attention</h4><p>计算query和key的相似度，使用dot product</p>
+<script type="math/tex; mode=display">
+Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V</script><p>softmax做归一</p>
+<p>分步分析：</p>
+<ul>
+<li>$Q \in \mathbb{R}^{n \times d_k}$,$K \in \mathbb{R}^{n \times d_k}$,$V \in \mathbb{R}^{n \times d_v}$</li>
+<li>$QK^T$可看作$[q_1K^T,q_2K^T,…,q_nK^T]^T$$q_i$为Q的每行。即在计算输入序列中每个值和所有Key的相似性（输入序列中某一点和其他点的关系）</li>
+<li>softmax归一化后，$softmax(\frac{QK^T}{\sqrt{d_k}}) \in \mathbb{R}^{n\times n}$中的第i行代表输入序列中第i个位置对于所有序列的权重</li>
+</ul>
+<p>和ASTER中的attention机制区别：</p>
+<ul>
+<li>ASTERdecoder中每得到一个输出，就计算一下该输出的attention值，用于下一个输入</li>
+<li>dot-product attention可直接得到所有序列的attention值</li>
+</ul>
+<h4 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h4><p>将query, key, value 映射到不同的dimension里面，将输出连接起来再进行一次线性映射。类似于多个不同维度参数的dot production attention连接后，再过一个全连接层</p>
+<p>这里平行的dot production attention中Q,K,V维度统一为64</p>
+<p>(为什么不用不同长度的维度？不会导致平行的head参数类似或相等么)</p>
+<h4 id="Attention-applied-in-Transformer"><a href="#Attention-applied-in-Transformer" class="headerlink" title="Attention applied in Transformer"></a>Attention applied in Transformer</h4><ul>
+<li><strong>encoder-decoder attention</strong>：queries来自之前的decoder layer（decoder layer’s input）；keys &amp; values来自encoder的输出</li>
+<li><strong>encoder</strong>：所有Q,K,V均来自上一个encoder的输出（即这个endoer层的输入）<ul>
+<li><strong>decoder</strong>：加一个masking。$masking(QK^T)$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h3><p>两层全连接网络</p>
+<script type="math/tex; mode=display">
+FFN(x)=max(0,xW_1+b_1)W_2+b_2</script><ul>
+<li>输入：512</li>
+<li>隐藏层：2048</li>
+<li>输出：512</li>
+</ul>
+<p>这里可以用conv1来进行实现</p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><p>每一层由multi-head self-attention mechanism，一个position-wise fully connected feed-forward network和一个masked multi-head self-attention。多出来的masked multi-head self-attention是为了防止使用位置在该点之后的数据</p>
+<p><strong>Attention 层和FFN和encoder一样</strong></p>
+<h3 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h3><p>因为并没有使用CNN以及RNN。整个网络的框架没有考虑到位置信息（CNN考虑相对位置，RNN考虑绝对位置）。所以，要加入Positional Encoding对位置信息进行包括</p>
+<script type="math/tex; mode=display">
+PE_{pos,2i}=sin(pos/10000^{2i/d_{model}})</script><script type="math/tex; mode=display">
+PE_{pos,2i+1}=cos(pos/10000^{2i/d_{model}})</script><p>$pos$是位置，$i$是这个位置上的embedding信息中的dimension。根据sin函数特性，$PE_{pos+k}$和$PE_{pos}$作为相对位置，具有一定的线性关系。</p>
+
     </div>
 
     
@@ -334,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model-Architecture"><span class="nav-number">4.</span> <span class="nav-text">Model Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoder"><span class="nav-number">4.1.</span> <span class="nav-text">Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attention%EF%BC%88self-attention%EF%BC%89"><span class="nav-number">4.1.1.</span> <span class="nav-text">Attention（self-attention）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Scaled-Dot-Product-Attention"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">Scaled Dot-Product Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Head-Attention"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">Multi-Head Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-applied-in-Transformer"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">Attention applied in Transformer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-wise-Feed-Forward-Networks"><span class="nav-number">4.1.2.</span> <span class="nav-text">Position-wise Feed-Forward Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoder"><span class="nav-number">4.2.</span> <span class="nav-text">Decoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">4.2.1.</span> <span class="nav-text">Positional Encoding</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
