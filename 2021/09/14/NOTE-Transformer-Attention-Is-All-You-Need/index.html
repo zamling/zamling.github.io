@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/transformer/图一.jpg">
 <meta property="article:published_time" content="2021-09-14T07:04:28.000Z">
-<meta property="article:modified_time" content="2021-10-05T04:19:52.000Z">
+<meta property="article:modified_time" content="2021-10-10T12:25:45.202Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-05 12:19:52" itemprop="dateModified" datetime="2021-10-05T12:19:52+08:00">2021-10-05</time>
+                <time title="Modified: 2021-10-10 20:25:45" itemprop="dateModified" datetime="2021-10-10T20:25:45+08:00">2021-10-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,6 +313,11 @@ FFN(x)=max(0,xW_1+b_1)W_2+b_2</script><ul>
 <script type="math/tex; mode=display">
 PE_{pos,2i}=sin(pos/10000^{2i/d_{model}})</script><script type="math/tex; mode=display">
 PE_{pos,2i+1}=cos(pos/10000^{2i/d_{model}})</script><p>$pos$是位置，$i$是这个位置上的embedding信息中的dimension。根据sin函数特性，$PE_{pos+k}$和$PE_{pos}$作为相对位置，具有一定的线性关系。</p>
+<h3 id="About-MLP-Mixer"><a href="#About-MLP-Mixer" class="headerlink" title="About MLP-Mixer"></a>About MLP-Mixer</h3><p>MLP-Mixer的架构和ViT比较相似，但它不用添加positional embedding，原因是：</p>
+<ul>
+<li>由于channel mixing MLP是permutation-variant，对tokens的顺序是敏感的，这和ViT不同，因为self-attention是permutation-invariant的。因次Mixer不需要e position embedding。</li>
+</ul>
+<p>并且，他的图片必须是固定大小的（这里不同于ViT）。这是由于MLP-patches需要接收patches的个数，所以必须为固定大小</p>
 
     </div>
 
@@ -334,7 +339,10 @@ PE_{pos,2i+1}=cos(pos/10000^{2i/d_{model}})</script><p>$pos$是位置，$i$是�
     <a href="/2021/03/15/C++%E7%AC%94%E8%AE%B0/" rel="prev" title="C++笔记.md">
       <i class="fa fa-chevron-left"></i> C++笔记.md
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/10/NOTE-ViT-AN-IMAGE-IS-WORTH-16X16-WORDS/" rel="next" title="[NOTE] ViT: AN IMAGE IS WORTH 16X16 WORDS">
+      [NOTE] ViT: AN IMAGE IS WORTH 16X16 WORDS <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -394,7 +402,7 @@ PE_{pos,2i+1}=cos(pos/10000^{2i/d_{model}})</script><p>$pos$是位置，$i$是�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model-Architecture"><span class="nav-number">4.</span> <span class="nav-text">Model Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoder"><span class="nav-number">4.1.</span> <span class="nav-text">Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attention%EF%BC%88self-attention%EF%BC%89"><span class="nav-number">4.1.1.</span> <span class="nav-text">Attention（self-attention）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Scaled-Dot-Product-Attention"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">Scaled Dot-Product Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Head-Attention"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">Multi-Head Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-applied-in-Transformer"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">Attention applied in Transformer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-wise-Feed-Forward-Networks"><span class="nav-number">4.1.2.</span> <span class="nav-text">Position-wise Feed-Forward Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoder"><span class="nav-number">4.2.</span> <span class="nav-text">Decoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">4.2.1.</span> <span class="nav-text">Positional Encoding</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model-Architecture"><span class="nav-number">4.</span> <span class="nav-text">Model Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoder"><span class="nav-number">4.1.</span> <span class="nav-text">Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attention%EF%BC%88self-attention%EF%BC%89"><span class="nav-number">4.1.1.</span> <span class="nav-text">Attention（self-attention）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Scaled-Dot-Product-Attention"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">Scaled Dot-Product Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Head-Attention"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">Multi-Head Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-applied-in-Transformer"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">Attention applied in Transformer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-wise-Feed-Forward-Networks"><span class="nav-number">4.1.2.</span> <span class="nav-text">Position-wise Feed-Forward Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoder"><span class="nav-number">4.2.</span> <span class="nav-text">Decoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">4.2.1.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#About-MLP-Mixer"><span class="nav-number">4.2.2.</span> <span class="nav-text">About MLP-Mixer</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +418,7 @@ PE_{pos,2i+1}=cos(pos/10000^{2i/d_{model}})</script><p>$pos$是位置，$i$是�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
