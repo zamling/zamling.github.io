@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文主要介绍《AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE 》这篇文章 Abstract摘要提出了Attention机制对于视觉模型的作用：  和Convolutional Networks进行连接 代替一部分的Convolutional Networks，但总体的框架不变  本文主要提出了一个">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-10T03:28:07.000Z">
-<meta property="article:modified_time" content="2021-10-10T05:18:19.254Z">
+<meta property="article:modified_time" content="2021-10-10T12:51:57.857Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-10-10 11:28:07 / Modified: 13:18:19" itemprop="dateCreated datePublished" datetime="2021-10-10T11:28:07+08:00">2021-10-10</time>
+              <time title="Created: 2021-10-10 11:28:07 / Modified: 20:51:57" itemprop="dateCreated datePublished" datetime="2021-10-10T11:28:07+08:00">2021-10-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,9 +259,10 @@
 <p>机器学习试图去建造一个可以学习的算法，用来预测某个目标的结果。要达到此目的，要给于学习算法一些训练样本，样本说明输入与输出之间的预期关系。然后假设学习器在预测中逼近正确的结果，其中包括在训练中未出现的样本。既然未知状况可以是任意的结果，若没有其它额外的假设，这任务就无法解决。<strong>这种关于目标函数的必要假设就称为归纳偏置</strong></p>
 </blockquote>
 <p>也就是说，对于你选择的模型所必要的假设就是归纳偏置</p>
-<p>对于CNN，其归纳偏置为：相近位置的信息有关联，较远的信息无关联。而图片数据集完美符合了这样一个归纳偏置</p>
+<p>对于CNN，其归纳偏置为：局部相关性：邻近的像素是相关的；权重共享：图像的不同部分应该以相同的方式处理，无论它们的绝对位置如何。</p>
 <p>但是，如果经过一个larger datasets与训练后，效果会胜过inductive bias</p>
-
+<p><strong>我认为归纳偏置可以理解为一个先验，将模型在目标空间中先进行了一定的约束（按照归纳偏置），类似于正则化，使得模型可以快速收敛。而对于一个大数据集来说，更广阔的目标空间可能可以找到更好的目标函数。所以归纳偏置在小数据集上是一个优势，而在大数据集中，归纳偏置反而不再是优势，甚至成为寻找最优目标函数的绊脚石。</strong></p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="Vision-Transformer"><a href="#Vision-Transformer" class="headerlink" title="Vision Transformer"></a>Vision Transformer</h2>
     </div>
 
     
@@ -342,7 +343,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-number">3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vision-Transformer"><span class="nav-number">3.1.</span> <span class="nav-text">Vision Transformer</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
