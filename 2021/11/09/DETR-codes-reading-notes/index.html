@@ -28,7 +28,7 @@
 <meta property="og:description" content="关于DETR的代码解析，代码地址  https:&#x2F;&#x2F;github.com&#x2F;facebookresearch&#x2F;detr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-09T10:05:53.000Z">
-<meta property="article:modified_time" content="2021-11-10T06:30:32.511Z">
+<meta property="article:modified_time" content="2021-11-10T10:41:54.392Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-10 14:30:32" itemprop="dateModified" datetime="2021-11-10T14:30:32+08:00">2021-11-10</time>
+                <time title="Modified: 2021-11-10 18:41:54" itemprop="dateModified" datetime="2021-11-10T18:41:54+08:00">2021-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,6 +285,59 @@ PE_{pos,2i} = sin(pos/10000^{2i/d_{model}})</script><p>这里 pos是x_embed &amp
 <h4 id="Based-Backbone"><a href="#Based-Backbone" class="headerlink" title="Based Backbone"></a>Based Backbone</h4><p>重点注意mask的转换，要把Resnet每一个节点对应的mask变换到输出的维度上面，生成新的NestedTensor</p>
 <p><strong>resnet的输出怎么是一个数组的tensor，难道是用了金字塔结构？</strong></p>
 <p>最后，backbone的输出为output features和position embedding results</p>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><h3 id="MultiheadAttention"><a href="#MultiheadAttention" class="headerlink" title="MultiheadAttention"></a>MultiheadAttention</h3><p>调用的pytorch库函数，源码分析如下<br>在进行将X映射为q,k,v时，使用了Parameter()和register_parameter的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self._qkv_same_embed_dim <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">    self.q_proj_weight = Parameter(torch.Tensor(embed_dim, embed_dim))</span><br><span class="line">    self.k_proj_weight = Parameter(torch.Tensor(embed_dim, self.kdim))</span><br><span class="line">    self.v_proj_weight = Parameter(torch.Tensor(embed_dim, self.vdim))</span><br><span class="line">    self.register_parameter(<span class="string">&#x27;in_proj_weight&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.in_proj_weight = Parameter(torch.empty(<span class="number">3</span> * embed_dim, embed_dim))</span><br><span class="line">    self.register_parameter(<span class="string">&#x27;q_proj_weight&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">    self.register_parameter(<span class="string">&#x27;k_proj_weight&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">    self.register_parameter(<span class="string">&#x27;v_proj_weight&#x27;</span>, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure><br>其中Parameter和register_parameter作用相似，Parameter底层源码也是通过register_parameter将tensor加入到网络self._paramter中的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch,empty</span><br></pre></td></tr></table></figure>
+<p>创建任意数据类型的tensor，torch.Tensor是其的一个FloatTensor的特例</p>
+<p>nn.MultiheadAttention中的mask有两种：</p>
+<ul>
+<li>key_padding_mask</li>
+<li>attn_mask<br>官方源码中，两个mask分别为</li>
+<li>key_padding_mask: if provided, specified padding elements in the key willbe ignored by the attention. When given a binary mask and a value is True,the corresponding value on the attention layer will be ignored. When givena byte mask and a value is non-zero, the corresponding value on the attentionlayer will be ignored。即在计算QV内积时，会将mask的给去掉  $(N, S)$ [batch size, key length]</li>
+<li>attn_mask: 2D or 3D mask that prevents attention to certain positions. A 2D mask will be broadcasted for all the batches while a 3D mask allows to specify a different mask for the entries of each batch. $L, S$ [query length,key length]</li>
+</ul>
+<p>实现部分为<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> attn_mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	<span class="keyword">if</span> attn_mask.dtype == torch.bool:</span><br><span class="line">		attn_output_weights.masked_fill_(attn_mask, float(<span class="string">&quot;-inf&quot;</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">		attn_output_weights += attn_mask</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> key_padding_mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	attn_output_weights = attn_output_weights.view(bsz, num_heads, tgt_len, src_len)</span><br><span class="line">	attn_output_weights = attn_output_weights.masked_fill(</span><br><span class="line">key_padding_mask.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>),</span><br><span class="line">float(<span class="string">&quot;-inf&quot;</span>),)</span><br><span class="line">	attn_output_weights = attn_output_weights.view(bsz * num_heads, tgt_len, src_len)</span><br><span class="line">attn_output_weights = softmax(attn_output_weights, dim=<span class="number">-1</span>)</span><br><span class="line">attn_output_weights = dropout(attn_output_weights, p=dropout_p, training=training)</span><br></pre></td></tr></table></figure></p>
+<p>看完这个源码，其实可以发现两个mask其实都是在mask QV的内积，而且每个内积都会mask两遍，所以其地位是等同的。由于key_padding_mask的形状受限的原因，一般作为一个padding mask，而attn_mask是接受了Q V分别的mask，可以接受Q,V不等大的padding mask（如encoder decoder连接时的mask），或者也可以用来做sequence mask（直接传入一个下三角矩阵）</p>
+<p>在DETR中，使用情况见下节</p>
+<h3 id="TransformerEncoderLayer-amp-TransformerEncoder"><a href="#TransformerEncoderLayer-amp-TransformerEncoder" class="headerlink" title="TransformerEncoderLayer &amp; TransformerEncoder"></a>TransformerEncoderLayer &amp; TransformerEncoder</h3><p>单层encoder的结构<br>输入：src，及 src_key_padding_mask (mask)</p>
+<p>src_mask是None</p>
+<p>推理过程为</p>
+<ul>
+<li>q,k是对src加positional encoding的结果，，v是src</li>
+<li>经过self-attention层（其中，rc_key_padding_mask作为key_padding_mask）</li>
+<li>Norm(src+dropout(src))</li>
+<li>两层FC层，夹着一个dropout层</li>
+<li>Norm(src+dropout(src))</li>
+<li>end</li>
+</ul>
+<p>另一个版本是将LayerNorm层提到每一个子层的前面（Multi-Attention-layer &amp; FFN）</p>
+<p><strong>NOTE</strong>：如果采用的是在所有前面采用LayerNorm，要在最后再加上一个norm</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">encoder_norm = nn.LayerNorm(d_model) <span class="keyword">if</span> normalize_before <span class="keyword">else</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<h3 id="TransformerDecoderLayer-amp-TransformerDecoder"><a href="#TransformerDecoderLayer-amp-TransformerDecoder" class="headerlink" title="TransformerDecoderLayer &amp; TransformerDecoder"></a>TransformerDecoderLayer &amp; TransformerDecoder</h3><p>单层decoder的结构<br>输入：tgt，memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask ,pos, query_pos<br><strong>memory_key_padding_mask是mask，其余的mask均为0</strong></p>
+<p>其中tgt为输出，pos是encoder的位置编码，memory为encoder的输出，query_pos是object queries（经过可学习的位置编码）</p>
+<p>推理过程为</p>
+<ul>
+<li>q,k是对tgt加query_pos的结果，v是tgt</li>
+<li>经过self-attention层（其中，tgt_mask作为attn_mask，tgt_key_padding_mask作为key_padding_mask）</li>
+<li>Norm(tgt+dropout(tgt))</li>
+<li>经过一个self-attention层，其中q是tgt+object queries，k是memory+pos，v是memory（其中，memory_mask作为attn_mask，memory_key_padding_mask作为key_padding_mask）</li>
+<li>Norm(tgt+dropout(tgt))</li>
+<li>两层FC层，夹着一个dropout层</li>
+<li>Norm(src+dropout(src))</li>
+<li>end</li>
+</ul>
+<p>另一个版本是将LayerNorm层提到每一个子层的前面（Multi-Attention-layer &amp; FFN）</p>
+<h3 id="整个Transfomer的推理过程"><a href="#整个Transfomer的推理过程" class="headerlink" title="整个Transfomer的推理过程"></a>整个Transfomer的推理过程</h3><p>输入src （经过backbone后的值），mask，query_embed，pos_embed<br>其中query_embed [N, hidden_dim]<br>输出:</p>
+<ul>
+<li>hs: decoder输出， object queries同形状的，最后在dim=0的位置扩一个维度（原因是可以添加一个每一层decoder输出的维度，当return_intermediate设置为false时，就是只输出最后一个layer的输出） [num_layer,batch size,N, embed_size]</li>
+<li>encoder的输出，格式转变成backbone的输出格式</li>
+</ul>
+<p>推理过程</p>
+<ul>
+<li>将src的形状从NxCxHxW 变成 HWxNxC</li>
+<li>将pos_embed形状从[N,embed,H,W]变成[HW,N,embed]</li>
+<li>encoder中的src_key_padding_mask和decoder中的memory_key_padding_mask均是mask（因为mask都是从图片的那个NestedTensor来的）尤其是对于encoder和decoder连接时的memory_key_padding_mask来说，相当于tgt_key_padding_mask等于0，也就是tgt是没有padding的，所以这里只mask memory部分就行了）</li>
+<li>注意tgt赋值为了query_embed size的0，也就是说输出形状和object queries一样</li>
+</ul>
 
     </div>
 
@@ -366,7 +419,7 @@ PE_{pos,2i} = sin(pos/10000^{2i/d_{model}})</script><p>这里 pos是x_embed &amp
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Backbone"><span class="nav-number">1.</span> <span class="nav-text">Backbone</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#position-encoding"><span class="nav-number">1.1.</span> <span class="nav-text">position_encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PositionEmbeddingSine"><span class="nav-number">1.1.1.</span> <span class="nav-text">PositionEmbeddingSine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PositionEmbeddingLearned"><span class="nav-number">1.1.2.</span> <span class="nav-text">PositionEmbeddingLearned</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Based-Backbone"><span class="nav-number">1.1.3.</span> <span class="nav-text">Based Backbone</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Backbone"><span class="nav-number">1.</span> <span class="nav-text">Backbone</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#position-encoding"><span class="nav-number">1.1.</span> <span class="nav-text">position_encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PositionEmbeddingSine"><span class="nav-number">1.1.1.</span> <span class="nav-text">PositionEmbeddingSine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PositionEmbeddingLearned"><span class="nav-number">1.1.2.</span> <span class="nav-text">PositionEmbeddingLearned</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Based-Backbone"><span class="nav-number">1.1.3.</span> <span class="nav-text">Based Backbone</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer"><span class="nav-number">2.</span> <span class="nav-text">Transformer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MultiheadAttention"><span class="nav-number">2.1.</span> <span class="nav-text">MultiheadAttention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransformerEncoderLayer-amp-TransformerEncoder"><span class="nav-number">2.2.</span> <span class="nav-text">TransformerEncoderLayer &amp; TransformerEncoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransformerDecoderLayer-amp-TransformerDecoder"><span class="nav-number">2.3.</span> <span class="nav-text">TransformerDecoderLayer &amp; TransformerDecoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AATransfomer%E7%9A%84%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">整个Transfomer的推理过程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
