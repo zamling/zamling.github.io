@@ -20,24 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="这一段在苦读西瓜书，看到了贝叶斯分类（第七章）后多有感触。作者比较菜，所以总结分析之处的可能多有不当，希望大家可以指出  简介一说到贝叶斯，第一个想到的就是Bayesian Law：  P(A|B)&#x3D;\frac{P(A)P(B|A)}{P(B)}而这个公式确实在各个领域都有很好的应用，也包括贝叶斯分类器中。 贝叶斯分类器非常的特殊，他将特征值和分类值的“地位”看成了等同的，即分类或者其中一个特征">
+  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从朴素贝叶斯到贝叶斯网">
-<meta property="og:url" content="http://example.com/2021/02/02/%E4%BB%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%B0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91/index.html">
+<meta property="og:title" content="[CODE] stable-pix2seq VS DETR">
+<meta property="og:url" content="http://example.com/2021/11/15/CODE-stable-pix2seq-VS-DETR/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="这一段在苦读西瓜书，看到了贝叶斯分类（第七章）后多有感触。作者比较菜，所以总结分析之处的可能多有不当，希望大家可以指出  简介一说到贝叶斯，第一个想到的就是Bayesian Law：  P(A|B)&#x3D;\frac{P(A)P(B|A)}{P(B)}而这个公式确实在各个领域都有很好的应用，也包括贝叶斯分类器中。 贝叶斯分类器非常的特殊，他将特征值和分类值的“地位”看成了等同的，即分类或者其中一个特征">
+<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/Bayesian/图一.png">
-<meta property="og:image" content="http://example.com/images/Bayesian/图二.PNG">
-<meta property="og:image" content="http://example.com/images/Bayesian/图三.PNG">
-<meta property="article:published_time" content="2021-02-02T13:00:15.000Z">
-<meta property="article:modified_time" content="2021-05-21T11:58:00.404Z">
+<meta property="article:published_time" content="2021-11-15T10:59:11.000Z">
+<meta property="article:modified_time" content="2021-11-15T11:00:20.200Z">
 <meta property="article:author" content="Enming ZHANG">
-<meta property="article:tag" content="机器学习-Machine Learning">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/Bayesian/图一.png">
 
-<link rel="canonical" href="http://example.com/2021/02/02/%E4%BB%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%B0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91/">
+<link rel="canonical" href="http://example.com/2021/11/15/CODE-stable-pix2seq-VS-DETR/">
 
 
 <script id="page-configurations">
@@ -50,7 +46,7 @@
   };
 </script>
 
-  <title>从朴素贝叶斯到贝叶斯网 | Zamling BLOG</title>
+  <title>[CODE] stable-pix2seq VS DETR | Zamling BLOG</title>
   
 
 
@@ -184,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/02/%E4%BB%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%B0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/15/CODE-stable-pix2seq-VS-DETR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/myself_profile.png">
@@ -197,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          从朴素贝叶斯到贝叶斯网
+          [CODE] stable-pix2seq VS DETR
         </h1>
 
         <div class="post-meta">
@@ -206,23 +202,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-02-02 21:00:15" itemprop="dateCreated datePublished" datetime="2021-02-02T21:00:15+08:00">2021-02-02</time>
+              <time title="Created: 2021-11-15 18:59:11 / Modified: 19:00:20" itemprop="dateCreated datePublished" datetime="2021-11-15T18:59:11+08:00">2021-11-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-21 19:58:00" itemprop="dateModified" datetime="2021-05-21T19:58:00+08:00">2021-05-21</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/self-study/" itemprop="url" rel="index"><span itemprop="name">self-study</span></a>
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
                 </span>
             </span>
 
@@ -235,8 +225,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/02/02/%E4%BB%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%B0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/02/%E4%BB%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%B0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/11/15/CODE-stable-pix2seq-VS-DETR/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/15/CODE-stable-pix2seq-VS-DETR/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -251,44 +241,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>这一段在苦读西瓜书，看到了贝叶斯分类（第七章）后多有感触。作者比较菜，所以总结分析之处的可能多有不当，希望大家可以指出</p>
-</blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>一说到贝叶斯，第一个想到的就是Bayesian Law：</p>
-<script type="math/tex; mode=display">
-P(A|B)=\frac{P(A)P(B|A)}{P(B)}</script><p>而这个公式确实在各个领域都有很好的应用，也包括贝叶斯分类器中。</p>
-<p>贝叶斯分类器非常的特殊，他将特征值和分类值的“地位”看成了等同的，即分类或者其中一个特征值都可以成为最后<strong>推断</strong>的值。如果让我用一句话来总结一下贝叶斯分类器：<strong>贝叶斯分类器就是不同复杂程度的图</strong>，如朴素贝叶斯的简单的树（树也是图的一种），到贝叶斯网络的有向无环图（DAG）。可能乍看这句话有点不知所云，不要着急，听我慢慢道来</p>
-<a id="more"></a>
-<h2 id="一个非常重要的公式"><a href="#一个非常重要的公式" class="headerlink" title="一个非常重要的公式"></a>一个非常重要的公式</h2><p>定义贝叶斯分类器的有向图为<script type="math/tex">B=<G,\theta></script> ，属性以及分类值为节点，属性间的关系为边，父节点为该节点的依赖。其中$G$代表了图的结构，<script type="math/tex">\theta</script> 代表了参数，包含了每个属性的条件概率表（CPT），我将在后面解释</p>
-<p>而对于这个图，其总有联合概率分布（*）：</p>
-<script type="math/tex; mode=display">
-P_B(c,x_1, x_2, ... x_d)=P_B(c|\pi_c)\prod_{i=1}^{d}{P_B(x_i|\pi_i)}=P_B(c|\pi_c)\prod_{i=1}^{d}{P_B(\theta_{x_i}|\pi_i)}</script><p>其中$x_i$指的是样本$x$中的第$i$个特征，$\theta_{x_i}$是指第$i$个特征（或分类值）的条件概率表，$\pi_i$是指的第$i$个特征的<em>依赖特征</em>，可以理解为该节点的父节点</p>
-<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>朴素贝叶斯之所以叫Naïve 是因为他有一个不切合实际的前提：各个特征之间相互独立。学过马原的都知道，马克思主义世界观强调的一点就是联系的普遍性，所以几乎不可能存在一个特征和其他特征完全独立。但既然是贝叶斯分类器中的最简单的，可以先认为这个前提是正确的。而且在某些领域，如文字过滤，还是可以用的。既然有了这样一个大前提，那么（*）要改成什么样子呢？</p>
-<p>先说朴素贝叶斯的图吧，所有特征的父节点（依赖）只有类别（图1），也就是说特征只和该样本所属的类别有关。那么$\pi_i$就成了$c$了，$c$是这个样本的类别。而分类值$c$本身没有依赖，所以$P_B(c|\pi_c)=P(c)$。最后（*）式就可以改成：</p>
-<script type="math/tex; mode=display">
-P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c))}</script><p>而如果想用朴素贝叶斯实现分类，想得到的其实是$P(c|x_1,x_2,…)=\frac{P_B(c,x_1, x_2, … x_d)}{P(x_1,x_2,…)}$分母和类别$c$无关，只是一个归一化量，可以不用看。所以属于哪一类就是看哪一个$c$的（*）式计算结果最大。</p>
-<p><img src="\images\Bayesian\图一.png" alt="图一"></p>
-<p>从上面的图，可以看到朴素贝叶斯的图其实就是一个树，而CPT其实就是每个特征$x_i$在给定类别$c$的概率，并且把所有的可能都写在一个表里面。而（*）式更可以看作“CPT相乘”。而CPT的获取是通过训练集计数实现或者通过“懒惰学习”。</p>
-<h2 id="半朴素贝叶斯"><a href="#半朴素贝叶斯" class="headerlink" title="半朴素贝叶斯"></a>半朴素贝叶斯</h2><p>由于特征之间相互独立这个前提条件太扯了，所以人们提出了半朴素贝叶斯，即特征可以和其中一个特征相关。最有代表性的是：</p>
-<ul>
-<li>“超父”类型的<strong>SPODE 和 AODE</strong></li>
-<li><strong>TAN</strong></li>
-</ul>
-<h3 id="SPODE-amp-AODE"><a href="#SPODE-amp-AODE" class="headerlink" title="SPODE &amp; AODE"></a>SPODE &amp; AODE</h3><p><strong>SPODE</strong>是选取其中一个特征作为其他人共同的爹，如图二</p>
-<p><img src="\images\Bayesian\图二.PNG" alt="图二"></p>
-<p>而超父的选取通常使用交叉验证的方法。此时，（*）式也就变成了</p>
-<script type="math/tex; mode=display">
-P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c,parent))}</script><p>更多的，用于分类比大小的$P(c|x_1,x_2,…)$仍然和上式成正比。</p>
-<p><strong>AODE</strong>其实就是把每个特征都当一次超父，并求和，具体的公式就不再展示了。</p>
-<h3 id="TAN"><a href="#TAN" class="headerlink" title="TAN"></a>TAN</h3><p><strong>TAN</strong>的思想就不再局限于只有一个爹，而是通过以条件互信息（<em>conditional mutual information</em>）作为图的边的权重，构建一个最大带权生成树，如图三</p>
-<p><img src="\images\Bayesian\图三.PNG" alt="图三"></p>
-<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p>上面的贝叶斯分类器最终的目标其实还是实现分类，即比较$P(c|x_1,x_2,…)$的大小。而到了贝叶斯网络，目标变成了<strong>推断</strong>。即令$\textbf{Q}={Q_1,Q_2…}$ 表示待查询变量，$\textbf{E}=E_1,E_2,…$为证据变量，目标是计算后验概率$P(\textbf{Q}=\textbf{q} | \textbf{E} = \textbf{e})$ 。一般使用而我们其实可以通过（*）式得到$P(Q_i|\textbf Z)$的值，$\textbf Z = \textbf Q \cup \textbf E /Q_i$（先用CPT连乘起来，即算出来所有的联合概率密度，再计算不在$\textbf Z$中的特征的边缘分布以及将$\textbf Z$中的值带入到CPT中查表）。具体的代码实现等有时间再完善。</p>
-<p>关于贝叶斯网络的例子，可以看：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zdy0_2004/article/details/41096141">https://blog.csdn.net/zdy0_2004/article/details/41096141</a></p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从朴素贝叶斯到贝叶斯网络，可以看到前提条件越来越宽松，而图模型也越来越复杂，但不管怎么说，（*）式一直贯穿着贝叶斯分类器的始终。总结的如有问题，欢迎直接提问。</p>
-
+        
     </div>
 
     
@@ -297,7 +250,7 @@ P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c,parent))}</script><p>更多
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Machine-Learning/" rel="tag"># 机器学习-Machine Learning</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
           </div>
 
         
@@ -305,11 +258,11 @@ P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c,parent))}</script><p>更多
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/02/21/Resnet.CRNN%20Overview-md/" rel="next" title="Resnet.CRNN Overview.md">
-      Resnet.CRNN Overview.md <i class="fa fa-chevron-right"></i>
+    <a href="/2021/11/09/DETR-codes-reading-notes/" rel="prev" title="[CODE]: DETR codes reading notes">
+      <i class="fa fa-chevron-left"></i> [CODE]: DETR codes reading notes
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -369,7 +322,6 @@ P_B(c,x_1, x_2, ... x_d)=P(c)\prod_{i=1}^{d}{P(x_i|c,parent))}</script><p>更多
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">一个非常重要的公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">3.</span> <span class="nav-text">朴素贝叶斯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">4.</span> <span class="nav-text">半朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPODE-amp-AODE"><span class="nav-number">4.1.</span> <span class="nav-text">SPODE &amp; AODE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAN"><span class="nav-number">4.2.</span> <span class="nav-text">TAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="nav-number">5.</span> <span class="nav-text">贝叶斯网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
