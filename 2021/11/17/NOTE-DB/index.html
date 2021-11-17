@@ -20,19 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="Abstract不同于Mask-RCNN，DETR，pix2seq等检测网络（可以看成一个回归问题），DB的检测是基于分割的，即先分割，再框框。这样做的优点是可以检测任意的形状。而DB的主要贡献即将handcraft的binarization（一般要手动设置一个threshold）加入到了分割网络中，使得网络更加易于deploy和general">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTE]: DB">
+<meta property="og:url" content="http://example.com/2021/11/17/NOTE-DB/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="Abstract不同于Mask-RCNN，DETR，pix2seq等检测网络（可以看成一个回归问题），DB的检测是基于分割的，即先分割，再框框。这样做的优点是可以检测任意的形状。而DB的主要贡献即将handcraft的binarization（一般要手动设置一个threshold）加入到了分割网络中，使得网络更加易于deploy和general">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-02T12:45:03.000Z">
-<meta property="article:modified_time" content="2021-02-02T14:30:21.169Z">
+<meta property="og:image" content="http://example.com/images/DB/图一.png">
+<meta property="og:image" content="http://example.com/images/DB/图二.png">
+<meta property="og:image" content="http://example.com/images/DB/图三.png">
+<meta property="article:published_time" content="2021-11-17T10:27:58.000Z">
+<meta property="article:modified_time" content="2021-11-17T11:38:53.922Z">
 <meta property="article:author" content="Enming ZHANG">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/DB/图一.png">
 
-<link rel="canonical" href="http://example.com/tags/">
+<link rel="canonical" href="http://example.com/2021/11/17/NOTE-DB/">
 
 
 <script id="page-configurations">
@@ -40,13 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>tags | Zamling BLOG
-</title>
+  <title>[NOTE]: DB | Zamling BLOG</title>
   
 
 
@@ -172,51 +176,163 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="en">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/17/NOTE-DB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myself_profile.png">
+      <meta itemprop="name" content="Enming ZHANG">
+      <meta itemprop="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zamling BLOG">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NOTE]: DB
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">tags
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<div class="post-meta">
+              <time title="Created: 2021-11-17 18:27:58 / Modified: 19:38:53" itemprop="dateCreated datePublished" datetime="2021-11-17T18:27:58+08:00">2021-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/11/17/NOTE-DB/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: DB" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/11/17/NOTE-DB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/17/NOTE-DB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
 
-</div>
+        </div>
+      </header>
 
-</header>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              4 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/C/" style="font-size: 12px; color: #ccc">C++</a> <a href="/tags/pastime/" style="font-size: 12px; color: #ccc">pastime</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Machine-Learning/" style="font-size: 12px; color: #ccc">机器学习-Machine Learning</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" style="font-size: 30px; color: #111">深度学习-Deep Learning</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
+        <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>不同于Mask-RCNN，DETR，pix2seq等检测网络（可以看成一个回归问题），DB的检测是基于分割的，即先分割，再框框。这样做的优点是可以检测任意的形状。而DB的主要贡献即将handcraft的binarization（一般要手动设置一个threshold）加入到了分割网络中，使得网络更加易于deploy和general</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>传统的Binarization过程为：</p>
+<ul>
+<li>设置一个固定的threshold（在MaskTextSpotter V2中，thresholds被设置成了192），把图片改为一个二值图片</li>
+<li>运用例如pixel clustering的启发式算法，得到文本级的边框特性</li>
+</ul>
+<p>由于之前的这些Binarization算法是不可微的（本质上为分段函数，有一类间断点）。DB采用的是一种近似的函数进行binarization</p>
+<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><p>整体结构为</p>
+<p><img src="\images\DB\图一.png" alt="图一"></p>
+<h2 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h2><p>backbone部分采用了金字塔形状，concat了后四层的图片，然后作为probability map &amp; threshold map的输入（类似做分割时的FCN）</p>
+<h2 id="Binarization"><a href="#Binarization" class="headerlink" title="Binarization"></a>Binarization</h2><h3 id="Standard-Binarization"><a href="#Standard-Binarization" class="headerlink" title="Standard Binarization"></a>Standard Binarization</h3><script type="math/tex; mode=display">
+B_{i,j}=II(P_{i,j} \geq t)</script><h3 id="Differentiable-Binarization"><a href="#Differentiable-Binarization" class="headerlink" title="Differentiable Binarization"></a>Differentiable Binarization</h3><script type="math/tex; mode=display">
+B_{i,j}=\frac {1}{1+e^{-k(P_{i,j}-T_{i,j})}}</script><p>$P_{i,j}$是probability map的值，$T_{i,j}$是threshold map的值。$k$作为放大系数，在这里$k=50$</p>
+<p>这里形似Sigmoid函数</p>
+<script type="math/tex; mode=display">
+S(x)=\frac{1}{1+e^{-x}}</script><p>这样的形式也用了sigmoid函数的优点，如好求导等。</p>
+<p><img src="\images\DB\图二.png" alt="图二"></p>
+<p>(a)中可以看出，DB类似于SB的函数表现</p>
+<p>(b)是正样本的loss gradient曲线，(c)是负样本的loss gradient曲线。在图中，x代表的是$P-T$，即大于0，B为1，小于0，B为0。那么增大k后，第一类错误和假阳性（第二类错误）的loss将异常的高。并且，$P-T$的这样子的模式也更利于threshold随着图片特性改变（不同的前景，背景对比度 例如）</p>
+<h2 id="Label-generation"><a href="#Label-generation" class="headerlink" title="Label generation"></a>Label generation</h2><h3 id="For-probability-map"><a href="#For-probability-map" class="headerlink" title="For probability map"></a>For probability map</h3><ul>
+<li><p>首先确定数据集label的框的所有顶点，记作 $G=(s_k)^n_{k=1}$</p>
+</li>
+<li><p>使用Vatti clipping algorithm将这个框缩小，$G-&gt;G_s$其中offset of shrinking $D=A(1-r^2)/L$，A是面积，L是周长，$r=0.4$在这里（缩小系数 shrink ratio）</p>
+</li>
+</ul>
+<h3 id="For-threshold-map"><a href="#For-threshold-map" class="headerlink" title="For threshold map"></a>For threshold map</h3><p>再做一个扩大的$G_d$，把$G_d,G_s$之间的gap作为border，并作为threshold的label</p>
+<p><img src="\images\DB\图三.png" alt="图三"></p>
+<p><strong>这些label应该是一个map</strong></p>
+<h2 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h2><p><strong>Define</strong>: </p>
+<ul>
+<li>$L_s$: probability map loss</li>
+<li>$L_b$: binary map loss</li>
+<li>$L_t$: threshold map loss</li>
+</ul>
+<p>probability map &amp; binary map用的是binary cross-entropy</p>
+<p>假设损失函数为binary cross-entropy</p>
+<script type="math/tex; mode=display">
+L=-\frac{1}{N}\sum^N y_i log(p(y_i)+(1-y_i)log(1-p(y_i)</script><p>即MaskTextSpotter中的$L_{globle}$</p>
+<p>threshold map的loss用的是L1 损失函数</p>
+<script type="math/tex; mode=display">
+L_t=\sum_{i \in R_d}|y^*_i-x^*_i|</script><p>这里的意思是 $G_d$里面的所有点label和prediction值的差的和</p>
+<h2 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h2><p>在推理过程中，先将probability map或者 approximate binary map二值化(threshold=0.2)。然后由于probability map 是shrink过的，所以再扩大，用$D’=\frac {A’\times r’}{L’}$ $r’=1.5$</p>
+<p><strong>这里为什么可以直接用probability map？</strong>:我认为是因为在监督训练的时候，probability map已经在threshold的帮助下进行了优化</p>
+
     </div>
-    
 
     
     
     
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/17/DaVinci-Notes/" rel="prev" title="DaVinci Notes">
+      <i class="fa fa-chevron-left"></i> DaVinci Notes
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
 
 
           </div>
@@ -268,6 +384,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methodology"><span class="nav-number">3.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Backbone"><span class="nav-number">3.1.</span> <span class="nav-text">Backbone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binarization"><span class="nav-number">3.2.</span> <span class="nav-text">Binarization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Standard-Binarization"><span class="nav-number">3.2.1.</span> <span class="nav-text">Standard Binarization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Differentiable-Binarization"><span class="nav-number">3.2.2.</span> <span class="nav-text">Differentiable Binarization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Label-generation"><span class="nav-number">3.3.</span> <span class="nav-text">Label generation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#For-probability-map"><span class="nav-number">3.3.1.</span> <span class="nav-text">For probability map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-threshold-map"><span class="nav-number">3.3.2.</span> <span class="nav-text">For threshold map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss"><span class="nav-number">3.4.</span> <span class="nav-text">Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inference"><span class="nav-number">3.5.</span> <span class="nav-text">Inference</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,6 +614,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
