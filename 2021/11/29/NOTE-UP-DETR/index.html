@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+  <meta name="description" content="Code: https:&#x2F;&#x2F;github.com&#x2F;dddzg&#x2F;up-detr.  Abstract提出一种Random Query Patch Detection的task来无监督训练DETR的模型（看起来类似BERT的那个mask的自监督形式，ViT最后提到的self-attention?）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DaVinci Notes">
-<meta property="og:url" content="http://example.com/2021/11/17/DaVinci-Notes/index.html">
+<meta property="og:title" content="[NOTE]: UP-DETR">
+<meta property="og:url" content="http://example.com/2021/11/29/NOTE-UP-DETR/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="Code: https:&#x2F;&#x2F;github.com&#x2F;dddzg&#x2F;up-detr.  Abstract提出一种Random Query Patch Detection的task来无监督训练DETR的模型（看起来类似BERT的那个mask的自监督形式，ViT最后提到的self-attention?）。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-17T08:47:45.000Z">
-<meta property="article:modified_time" content="2021-11-17T09:27:23.673Z">
+<meta property="article:published_time" content="2021-11-29T10:35:42.000Z">
+<meta property="article:modified_time" content="2021-12-03T09:41:44.271Z">
 <meta property="article:author" content="Enming ZHANG">
-<meta property="article:tag" content="pastime">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/11/17/DaVinci-Notes/">
+<link rel="canonical" href="http://example.com/2021/11/29/NOTE-UP-DETR/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>DaVinci Notes | Zamling BLOG</title>
+  <title>[NOTE]: UP-DETR | Zamling BLOG</title>
   
 
 
@@ -180,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/17/DaVinci-Notes/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/29/NOTE-UP-DETR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/myself_profile.png">
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          DaVinci Notes
+          [NOTE]: UP-DETR
         </h1>
 
         <div class="post-meta">
@@ -202,22 +202,28 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-11-17 16:47:45 / Modified: 17:27:23" itemprop="dateCreated datePublished" datetime="2021-11-17T16:47:45+08:00">2021-11-17</time>
+              <time title="Created: 2021-11-29 18:35:42" itemprop="dateCreated datePublished" datetime="2021-11-29T18:35:42+08:00">2021-11-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-03 17:41:44" itemprop="dateModified" datetime="2021-12-03T17:41:44+08:00">2021-12-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Video-Clip/" itemprop="url" rel="index"><span itemprop="name">Video Clip</span></a>
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
                 </span>
             </span>
 
           
-            <span id="/2021/11/17/DaVinci-Notes/" class="post-meta-item leancloud_visitors" data-flag-title="DaVinci Notes" title="Views">
+            <span id="/2021/11/29/NOTE-UP-DETR/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: UP-DETR" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -239,8 +245,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/11/17/DaVinci-Notes/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/17/DaVinci-Notes/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/11/29/NOTE-UP-DETR/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/29/NOTE-UP-DETR/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -255,7 +261,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>Code: <a target="_blank" rel="noopener" href="https://github.com/dddzg/up-detr">https://github.com/dddzg/up-detr</a>.</p>
+</blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>提出一种Random Query Patch Detection的task来无监督训练DETR的模型（看起来类似BERT的那个mask的自监督形式，ViT最后提到的self-attention?）。</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>最近，无监督的visual representation learning (e.g. contrastive learning)非常的火，但不适用于直接迁移到当前的自监督问题上，因为DETR的Transformer更多的注意是在空间位置，而不是之前所涉及的visual representation learning.</p>
+<p>UP-DETR基于BERT的启发，提出的这样一个预训练DETR Transformer部分遇到了以下两个问题</p>
+<ul>
+<li>Multi-task learning: DETR完成的是分类个检测两个问题，如何预训练使得模型不破坏分类特征（降低分类的准确度）。提出了frozen backbone和patch feature reconstrction两个方法来对付这个问题</li>
+<li>Multi-query localization：不同的object queries注意的是不同的区域和区域大小，为了实现这样一个性质，使用了object query shuffle和attention mask来解决query patches和object queries之间的赋值问题（即query patches 如何到object queries）</li>
+</ul>
+<p>frozen backbone对于保持feature discrimination至关重要（保持分类问题的准确度）</p>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><p>里面说到了检测问题对正负样本的标注不同可分为 anchor和anchor-free两种。这里也隐晦的指出，不同于分类问题的正负样本（一张图片一个样本），检测问题中的正负样本指的是foreground和background。（所以有没有给出没有框的图片我觉得是无所谓的，加上没有框的图片并不是增加负样本）。</p>
+<p><strong>并且一些论文也指出，分类和定位这两个问题存在domain misalignment以及这两个task可能存在opposite preferences (正好和pix2seq想法相反)</strong></p>
+<h2 id="Unsupervised-Pre-training"><a href="#Unsupervised-Pre-training" class="headerlink" title="Unsupervised Pre-training"></a>Unsupervised Pre-training</h2><p>无监督（自监督）的方法在vision中可分为</p>
+<ul>
+<li>Instance-based discrimination tasks</li>
+<li>clustering-based tasks</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1>
     </div>
 
     
@@ -264,7 +289,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pastime/" rel="tag"># pastime</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
           </div>
 
         
@@ -273,13 +298,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/15/CODE-stable-pix2seq-VS-DETR/" rel="prev" title="[CODE] stable-pix2seq VS DETR">
-      <i class="fa fa-chevron-left"></i> [CODE] stable-pix2seq VS DETR
+    <a href="/2021/11/28/NOTE-Deformable-DETR/" rel="prev" title="[NOTE]:Deformable DETR">
+      <i class="fa fa-chevron-left"></i> [NOTE]:Deformable DETR
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/17/NOTE-DB/" rel="next" title="[NOTE]: DB">
-      [NOTE]: DB <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -339,6 +361,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsupervised-Pre-training"><span class="nav-number">3.1.</span> <span class="nav-text">Unsupervised Pre-training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
