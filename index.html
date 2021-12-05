@@ -201,7 +201,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-05 16:14:50 / Modified: 16:17:14" itemprop="dateCreated datePublished" datetime="2021-12-05T16:14:50+08:00">2021-12-05</time>
+              <time title="Created: 2021-12-05 16:14:50 / Modified: 22:41:01" itemprop="dateCreated datePublished" datetime="2021-12-05T16:14:50+08:00">2021-12-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,7 +245,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>不同于faster-rcnn需要产生最后一层feature map ($H\times W$)的每个pixel的anchor，共$HWk$个，Sparse RCNN直接学习预测proposal。</p>
+<p>这里回顾一下faster-rcnn做的步骤：</p>
+<ul>
+<li>产生anchors，分类得到分数，回归精确anchor的位置，经过pre_nms和post_nms之后，得到一堆proposals</li>
+</ul>
+<p>提出一个re-thinking，dense对于检测网络来说到底好不好</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/12/05/NOTE-Sparse-RCNN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
