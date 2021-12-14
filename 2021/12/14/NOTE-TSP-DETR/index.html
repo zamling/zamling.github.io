@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zamling BLOG">
-<meta property="og:url" content="http://example.com/archives/2021/12/index.html">
+  <meta name="description" content="论文的题目是Rethinking Transformer-based Set Prediction for Object Detection Abstract指出DETR将一个检测问题看成了set prediction问题（有点一步到位的感觉）  Set prediction is about learning to predict a collection of unordered variab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTE]: TSP-DETR">
+<meta property="og:url" content="http://example.com/2021/12/14/NOTE-TSP-DETR/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="论文的题目是Rethinking Transformer-based Set Prediction for Object Detection Abstract指出DETR将一个检测问题看成了set prediction问题（有点一步到位的感觉）  Set prediction is about learning to predict a collection of unordered variab">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-14T09:16:08.000Z">
+<meta property="article:modified_time" content="2021-12-14T10:55:55.592Z">
 <meta property="article:author" content="Enming ZHANG">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2021/12/">
+<link rel="canonical" href="http://example.com/2021/12/14/NOTE-TSP-DETR/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Zamling BLOG</title>
+  <title>[NOTE]: TSP-DETR | Zamling BLOG</title>
   
 
 
@@ -170,96 +173,146 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/14/NOTE-TSP-DETR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myself_profile.png">
+      <meta itemprop="name" content="Enming ZHANG">
+      <meta itemprop="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zamling BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NOTE]: TSP-DETR
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-14 17:16:08 / Modified: 18:55:55" itemprop="dateCreated datePublished" datetime="2021-12-14T17:16:08+08:00">2021-12-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/12/14/NOTE-TSP-DETR/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: TSP-DETR" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 16 posts in total. Keep on posting.</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/12/14/NOTE-TSP-DETR/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/14/NOTE-TSP-DETR/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T17:16:08+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/NOTE-TSP-DETR/" itemprop="url">
-            <span itemprop="name">[NOTE]: TSP-DETR</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-05T16:14:50+08:00"
-              content="2021-12-05">
-          12-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/05/NOTE-Sparse-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Sparse-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-04T17:50:26+08:00"
-              content="2021-12-04">
-          12-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Traditional Detection Network-1: Fast-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <p>论文的题目是<em>Rethinking Transformer-based Set Prediction for Object Detection</em></p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>指出DETR将一个检测问题看成了set prediction问题（有点一步到位的感觉）</p>
+<blockquote>
+<p>Set prediction is about learning to predict a collection of unordered variables with unknown interrelations</p>
+</blockquote>
+<p>提出了TSP-FCOS和TSP-RCNN两个解决收敛速度慢的方法</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>set prediction的方法主要就是解决了后处理，如NMS的方法的省略。根据使用NMS的方法，如Faster-RCNN，究其原因，还是框和框之间在网络中没有任何联系的，也就是每个框都没有综合获得过一个全局的信息。这也使得使用self-Attention。在实验中，作者发现，主要是cross-attention和匈牙利匹配使得收敛变慢，所以提出了以下想法</p>
+<ul>
+<li>删除decoder部分</li>
+<li>新的Feature of Interest (FoI)来做multi-level feature</li>
+<li>新的二分图匹配</li>
+</ul>
+<h1 id="什么导致了收敛缓慢"><a href="#什么导致了收敛缓慢" class="headerlink" title="什么导致了收敛缓慢"></a>什么导致了收敛缓慢</h1><h2 id="匈牙利为什么导致收敛缓慢"><a href="#匈牙利为什么导致收敛缓慢" class="headerlink" title="匈牙利为什么导致收敛缓慢"></a>匈牙利为什么导致收敛缓慢</h2><ul>
+<li>初始化是random的</li>
+<li>匹配不是很稳定，容易被noise干扰</li>
+</ul>
+<h3 id="Matching-distillation来进行验证"><a href="#Matching-distillation来进行验证" class="headerlink" title="Matching distillation来进行验证"></a>Matching distillation来进行验证</h3><p>用了一个与训练好的DETR模型的matching部分来做assignment，发现确实收敛加快了（肯定会加快，但感觉加快的不多啊，感觉不是匈牙利的锅），只对训练前几个epoch有用。感觉这个方法有点unfair</p>
+<h2 id="Attention-modules的问题"><a href="#Attention-modules的问题" class="headerlink" title="Attention modules的问题"></a>Attention modules的问题</h2><p>由于初始的Attention大多是uniform分布的（这也是序列不能过长的原因），而最终的attention是一个非常sparse的，所以这个一个sparse的过程是否会导致收敛缓慢呢？</p>
+<p>作者着重提出了cross attetnion，因为cross attention将encoder得到的information给了decoder，如果这些信息不准确，就寄了（这也是DETR小目标检测不准确的原因，经过Backbone，信息丢失，到encoder输出上就没有了小目标的信息了）。</p>
+<p>这里使用了一个negative entropy来看稀疏情况。发现尤其第一层的cross attention，几十个epoch之后稀疏性都没有收敛。所以网络也没有收敛</p>
+<h2 id="Decoder的重要性"><a href="#Decoder的重要性" class="headerlink" title="Decoder的重要性"></a>Decoder的重要性</h2><p>去掉decoder后，收敛加快。在小目标的检测上也有提高，但在大目标上就寄了。作者也提出了自己的一个解释：大目标有太多的可匹配的feature points了，所以在encoder中的attention稀疏之后很难关注到这么多点了</p>
+<h1 id="TSP-RCNN"><a href="#TSP-RCNN" class="headerlink" title="TSP-RCNN"></a>TSP-RCNN</h1><p>在RPN和RCNN之间加入Transformer Encoder</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/05/NOTE-Sparse-RCNN/" rel="prev" title="[NOTE]: Sparse-RCNN">
+      <i class="fa fa-chevron-left"></i> [NOTE]: Sparse-RCNN
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -306,6 +359,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%AF%BC%E8%87%B4%E4%BA%86%E6%94%B6%E6%95%9B%E7%BC%93%E6%85%A2"><span class="nav-number">3.</span> <span class="nav-text">什么导致了收敛缓慢</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%88%E7%89%99%E5%88%A9%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AF%BC%E8%87%B4%E6%94%B6%E6%95%9B%E7%BC%93%E6%85%A2"><span class="nav-number">3.1.</span> <span class="nav-text">匈牙利为什么导致收敛缓慢</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Matching-distillation%E6%9D%A5%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81"><span class="nav-number">3.1.1.</span> <span class="nav-text">Matching distillation来进行验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attention-modules%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.2.</span> <span class="nav-text">Attention modules的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoder%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">Decoder的重要性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TSP-RCNN"><span class="nav-number">4.</span> <span class="nav-text">TSP-RCNN</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -535,6 +589,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
