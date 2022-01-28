@@ -295,7 +295,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-28 17:51:52" itemprop="dateModified" datetime="2022-01-28T17:51:52+08:00">2022-01-28</time>
+                <time title="Modified: 2022-01-28 17:52:21" itemprop="dateModified" datetime="2022-01-28T17:52:21+08:00">2022-01-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,17 +342,14 @@
           <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>和DB一样，是一个E2E的pixel-level的，EAST使用的框架是FCN。与DB不同的是，EAST没有直接产生文本的instance segmentation mask，而是使用了score map和location map来定义了文本的外包矩形框。最终需要使用NMS。</p>
 <p>DB属于 segmentation-based method</p>
 <p>EAST属于 pixel-level regression-based method（看起来有点像segmentation方法）</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>NMS主要是backbone+merge的组成，输出为：</p>
-<ul>
-<li>score map：类似于DB中的probability map，得到当前pixel是文本的概率</li>
-<li>geo map：当前pixel到文本外包矩形的四个边的距离以及旋转角度。</li>
-</ul>
-<p>score map获得文本pixels，geo map获得外包矩形。</p>
-<p>在merge部分，代码中采用F.interpolate。这个函数其实和DB中的nn.Upsample一样，Upsample的底层其实就是用上述函数实现的</p>
-<h3 id="Label-Generating"><a href="#Label-Generating" class="headerlink" title="Label Generating"></a>Label Generating</h3><p>对于RBOX标签而言，ic15提供的了vertices和label，vertice可以得到一个最小的正方形包围框及他的角度</p>
-<p>RBOX包含了（在这个多边形中的）每个pixel距离上下左右四个边的距离（框外的值为0），以及一个角度</p>
-<h3 id="NMS"><a href="#NMS" class="headerlink" title="NMS"></a>NMS</h3><p>文本mask中的每一个点都会生成一个包围矩形框。例如，当一个文本被10个pixels mask之后，EAST将产生10个包围框，所以要通过NMS来减少包围框个数</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/17/NOTE-EAST/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
