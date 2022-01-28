@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+  <meta name="description" content="Introduction和DB一样，是一个E2E的pixel-level的，EAST使用的框架是FCN。与DB不同的是，EAST没有直接产生文本的instance segmentation mask，而是使用了score map和location map来定义了文本的外包矩形框。最终需要使用NMS。 DB属于 segmentation-based method EAST属于 pixel-level">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[NOTE]: Traditional Detection Network-1: Fast-RCNN">
-<meta property="og:url" content="http://example.com/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/index.html">
+<meta property="og:title" content="[NOTE]: EAST">
+<meta property="og:url" content="http://example.com/2022/01/17/NOTE-EAST/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="Introduction和DB一样，是一个E2E的pixel-level的，EAST使用的框架是FCN。与DB不同的是，EAST没有直接产生文本的instance segmentation mask，而是使用了score map和location map来定义了文本的外包矩形框。最终需要使用NMS。 DB属于 segmentation-based method EAST属于 pixel-level">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-12-04T09:50:26.000Z">
-<meta property="article:modified_time" content="2021-12-04T09:51:18.157Z">
+<meta property="article:published_time" content="2022-01-17T13:43:00.000Z">
+<meta property="article:modified_time" content="2022-01-28T09:51:52.504Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/">
+<link rel="canonical" href="http://example.com/2022/01/17/NOTE-EAST/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>[NOTE]: Traditional Detection Network-1: Fast-RCNN | Zamling BLOG</title>
+  <title>[NOTE]: EAST | Zamling BLOG</title>
   
 
 
@@ -180,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/17/NOTE-EAST/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/myself_profile.png">
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [NOTE]: Traditional Detection Network-1: Fast-RCNN
+          [NOTE]: EAST
         </h1>
 
         <div class="post-meta">
@@ -202,10 +202,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-12-04 17:50:26 / Modified: 17:51:18" itemprop="dateCreated datePublished" datetime="2021-12-04T17:50:26+08:00">2021-12-04</time>
+              <time title="Created: 2022-01-17 21:43:00" itemprop="dateCreated datePublished" datetime="2022-01-17T21:43:00+08:00">2022-01-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-28 17:51:52" itemprop="dateModified" datetime="2022-01-28T17:51:52+08:00">2022-01-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,7 +223,7 @@
             </span>
 
           
-            <span id="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: Traditional Detection Network-1: Fast-RCNN" title="Views">
+            <span id="/2022/01/17/NOTE-EAST/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: EAST" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -239,8 +245,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/01/17/NOTE-EAST/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/17/NOTE-EAST/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -255,7 +261,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>和DB一样，是一个E2E的pixel-level的，EAST使用的框架是FCN。与DB不同的是，EAST没有直接产生文本的instance segmentation mask，而是使用了score map和location map来定义了文本的外包矩形框。最终需要使用NMS。</p>
+<p>DB属于 segmentation-based method</p>
+<p>EAST属于 pixel-level regression-based method（看起来有点像segmentation方法）</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>NMS主要是backbone+merge的组成，输出为：</p>
+<ul>
+<li>score map：类似于DB中的probability map，得到当前pixel是文本的概率</li>
+<li>geo map：当前pixel到文本外包矩形的四个边的距离以及旋转角度。</li>
+</ul>
+<p>score map获得文本pixels，geo map获得外包矩形。</p>
+<p>在merge部分，代码中采用F.interpolate。这个函数其实和DB中的nn.Upsample一样，Upsample的底层其实就是用上述函数实现的</p>
+<h3 id="Label-Generating"><a href="#Label-Generating" class="headerlink" title="Label Generating"></a>Label Generating</h3><p>对于RBOX标签而言，ic15提供的了vertices和label，vertice可以得到一个最小的正方形包围框及他的角度</p>
+<p>RBOX包含了（在这个多边形中的）每个pixel距离上下左右四个边的距离（框外的值为0），以及一个角度</p>
+<h3 id="NMS"><a href="#NMS" class="headerlink" title="NMS"></a>NMS</h3><p>文本mask中的每一个点都会生成一个包围矩形框。例如，当一个文本被10个pixels mask之后，EAST将产生10个包围框，所以要通过NMS来减少包围框个数</p>
+
     </div>
 
     
@@ -273,12 +292,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/29/NOTE-UP-DETR/" rel="prev" title="[NOTE]: UP-DETR">
-      <i class="fa fa-chevron-left"></i> [NOTE]: UP-DETR
+    <a href="/2022/01/13/%E7%AE%97%E6%B3%95%E5%BF%83%E5%BE%97/" rel="prev" title="算法心得">
+      <i class="fa fa-chevron-left"></i> 算法心得
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/12/05/NOTE-Sparse-RCNN/" rel="next" title="[NOTE]: Sparse-RCNN">
-      [NOTE]: Sparse-RCNN <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/28/NOTE-FCOS/" rel="next" title="[NOTE]: FCOS">
+      [NOTE]: FCOS <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -339,6 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Label-Generating"><span class="nav-number">2.1.</span> <span class="nav-text">Label Generating</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NMS"><span class="nav-number">2.2.</span> <span class="nav-text">NMS</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
