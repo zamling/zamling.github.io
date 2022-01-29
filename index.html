@@ -199,10 +199,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-28 17:43:27 / Modified: 17:44:07" itemprop="dateCreated datePublished" datetime="2022-01-28T17:43:27+08:00">2022-01-28</time>
+              <time title="Created: 2022-01-28 17:43:27" itemprop="dateCreated datePublished" datetime="2022-01-28T17:43:27+08:00">2022-01-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-30 01:20:14" itemprop="dateModified" datetime="2022-01-30T01:20:14+08:00">2022-01-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -245,7 +251,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>FCN的结构大多用于一些稠密的预测任务上，如语义分割（每个pixel一个类别），关键点预测，counting等等。所以在检测中，也可以使用FCN的结构，论文cue了一下EAST这个网络，即通过feature map，预测每个pixel距离四个边的位置。这样子做是因为文字检测中文字不会重叠，没有语义ambiguous的pixel</p>
+<p>论文指出，FPN的结构可以极大的消除这一ambiguity，并且使用center-ness来消除一些low-quality框（距离目标中心非常远的）。最终和NMS的结果结合得到最终results</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/28/NOTE-FCOS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
