@@ -28,7 +28,7 @@
 <meta property="og:description" content="这篇论文是将FCOS应用在了instance segmentation上">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-30T03:37:36.000Z">
-<meta property="article:modified_time" content="2022-01-30T03:39:16.992Z">
+<meta property="article:modified_time" content="2022-02-09T03:28:57.481Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -202,10 +202,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-30 11:37:36 / Modified: 11:39:16" itemprop="dateCreated datePublished" datetime="2022-01-30T11:37:36+08:00">2022-01-30</time>
+              <time title="Created: 2022-01-30 11:37:36" itemprop="dateCreated datePublished" datetime="2022-01-30T11:37:36+08:00">2022-01-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-09 11:28:57" itemprop="dateModified" datetime="2022-02-09T11:28:57+08:00">2022-02-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -256,6 +262,25 @@
 
       
         <p>这篇论文是将FCOS应用在了instance segmentation上</p>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>实例分割不同于语义分割，需要将相同类别的不同实例的物体进行不同的种类分割（即在预测物体A时，需要将物体B当作背景，无论物体B是否为A的同类）。这样一个背景其实和视频追踪所需要的每帧特征一致（类似一种实例检测的任务）。现阶段通用的大多为二阶段网络，如Mask R-CNN，通过对ROI的获得，再通过对每一个ROI分别过mask head的方式来完成实例分割。这样一个二阶段的网络通常由如下缺点</p>
+<ul>
+<li>对于一个不规则形状的物体，使用一个正方形框可能会使得ROI所含信息与物体无关的部分过多</li>
+<li>为了区分前景和背景实例，在mask head中需要一个比较大的卷积核去获得更大的感受视野</li>
+<li>ROI的分辨率太低了（$14\times 14$对于mask rcnn来说），所以这样一个低分辨率会限制实例分割的性能表现。因为一个较好的实例分割模型应需要一个较高分辨率的输入。</li>
+</ul>
+<p>尽管FCN的网络在语义分割获得了很大的成果，但在实例分割任务中，FCN-based的方法始终不及ROI-based的方法，究其原因，是因为FCN对于两个个相似的物体需要一个看作前景一个看作背景比较困难（即传统的针对语义分割和实例分割任务不同的地方做的不是很好）。在ROI-based的框架下，相似物体自然的crop为两个ROIs。</p>
+<p>对于一个实例分割任务，一般需要两种信息：</p>
+<ul>
+<li>appearance information：用于分类</li>
+<li>location information：用于区分同类的物体，这部分大多都依靠ROI的cropping来实现</li>
+</ul>
+<p>CondInst提出了instance-sensitive convolution filters来实现ROI cropping这个操作，called instance-aware</p>
+<p>用类似COndConv的思想，生成一个mask FCN network parameters，例如只有这个实例的中心部分，而这个网络可以通过相对位置，形状和物体来进行掩码的生成。</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>对Mask-RCNN方法的流水线进行分析，发现先做检测就是为了使得网络可以表示实例。可以把bbox看作instance的一种encode。所以CondInst不使用bbox作为编码，而是把网络参数作为instance的编码器（一个很好的观点对于实例分割任务）。</p>
+<p>FCOS的原来的框架作为分类和mask head的参数生成。</p>
+<h3 id="Mask-Branch"><a href="#Mask-Branch" class="headerlink" title="Mask Branch"></a>Mask Branch</h3><p>mask head直连FPN的P3层，即$1/8$的input image resolution，由四层$3\times 3$的全卷积.</p>
+<h3 id="Controller-Head"><a href="#Controller-Head" class="headerlink" title="Controller Head"></a>Controller Head</h3><p>生成mask head的filters的参数，替换了原FCOS的reg head。</p>
 
     </div>
 
@@ -337,6 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mask-Branch"><span class="nav-number">2.1.</span> <span class="nav-text">Mask Branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-Head"><span class="nav-number">2.2.</span> <span class="nav-text">Controller Head</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
