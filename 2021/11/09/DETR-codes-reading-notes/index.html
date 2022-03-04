@@ -28,7 +28,7 @@
 <meta property="og:description" content="关于DETR的代码解析，代码地址  https:&#x2F;&#x2F;github.com&#x2F;facebookresearch&#x2F;detr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-09T10:05:53.000Z">
-<meta property="article:modified_time" content="2021-11-15T11:00:02.730Z">
+<meta property="article:modified_time" content="2022-02-19T04:42:09.619Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-15 19:00:02" itemprop="dateModified" datetime="2021-11-15T19:00:02+08:00">2021-11-15</time>
+                <time title="Modified: 2022-02-19 12:42:09" itemprop="dateModified" datetime="2022-02-19T12:42:09+08:00">2022-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -349,8 +349,8 @@ PE_{pos,2i} = sin(pos/10000^{2i/d_{model}})</script><p>这里 pos是x_embed &amp
 </ul>
 <p>推理过程</p>
 <ul>
-<li>将src的形状从NxCxHxW 变成 HWxNxC</li>
-<li>将pos_embed形状从[N,embed,H,W]变成[HW,N,embed]</li>
+<li>将src的形状从BxCxHxW 变成 HWxBxC</li>
+<li>将pos_embed形状从[B,embed,H,W]变成[HW,B,embed]</li>
 <li>encoder中的src_key_padding_mask和decoder中的memory_key_padding_mask均是mask（因为mask都是从图片的那个NestedTensor来的）尤其是对于encoder和decoder连接时的memory_key_padding_mask来说，相当于tgt_key_padding_mask等于0，也就是tgt是没有padding的，所以这里只mask memory部分就行了）</li>
 <li>注意tgt赋值为了query_embed size的0，也就是说输出形状和object queries一样</li>
 </ul>
@@ -479,7 +479,7 @@ PE_{pos,2i} = sin(pos/10000^{2i/d_{model}})</script><p>这里 pos是x_embed &amp
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="这篇论文是将FCOS应用在了instance segmentation上">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-30T03:37:36.000Z">
-<meta property="article:modified_time" content="2022-02-09T03:28:57.481Z">
+<meta property="article:modified_time" content="2022-02-11T05:00:50.396Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-09 11:28:57" itemprop="dateModified" datetime="2022-02-09T11:28:57+08:00">2022-02-09</time>
+                <time title="Modified: 2022-02-11 13:00:50" itemprop="dateModified" datetime="2022-02-11T13:00:50+08:00">2022-02-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,6 +281,10 @@
 <p>FCOS的原来的框架作为分类和mask head的参数生成。</p>
 <h3 id="Mask-Branch"><a href="#Mask-Branch" class="headerlink" title="Mask Branch"></a>Mask Branch</h3><p>mask head直连FPN的P3层，即$1/8$的input image resolution，由四层$3\times 3$的全卷积.</p>
 <h3 id="Controller-Head"><a href="#Controller-Head" class="headerlink" title="Controller Head"></a>Controller Head</h3><p>生成mask head的filters的参数，替换了原FCOS的reg head。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>question:</p>
+<ul>
+<li>代码中的controller是怎么和instance对齐的？</li>
+</ul>
 
     </div>
 
@@ -302,7 +306,10 @@
     <a href="/2022/01/28/NOTE-FCOS/" rel="prev" title="[NOTE]: FCOS">
       <i class="fa fa-chevron-left"></i> [NOTE]: FCOS
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/" rel="next" title="[NOTE]: Text Detection with Online Tracking">
+      [NOTE]: Text Detection with Online Tracking <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -362,7 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mask-Branch"><span class="nav-number">2.1.</span> <span class="nav-text">Mask Branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-Head"><span class="nav-number">2.2.</span> <span class="nav-text">Controller Head</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mask-Branch"><span class="nav-number">2.1.</span> <span class="nav-text">Mask Branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-Head"><span class="nav-number">2.2.</span> <span class="nav-text">Controller Head</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">3.</span> <span class="nav-text">Experiment</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +385,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

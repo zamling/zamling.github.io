@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zamling BLOG">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="这是一篇较早的文字追踪文章，是百度和自所联合发表的 AbstractSDE模型。对于视频文字检测，使用tracking的方式可以解决视频文字的一些难题（e.g. motion blur），该文章提出一种end2end的方式，在detection分支，使用ConvLSTM结构来获得空间上的信息。在追踪端，将追踪问题看作文字关联的问题。而这样将文字追踪看作detection和tracking (ass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTE]: Text Detection with Online Tracking">
+<meta property="og:url" content="http://example.com/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="这是一篇较早的文字追踪文章，是百度和自所联合发表的 AbstractSDE模型。对于视频文字检测，使用tracking的方式可以解决视频文字的一些难题（e.g. motion blur），该文章提出一种end2end的方式，在detection分支，使用ConvLSTM结构来获得空间上的信息。在追踪端，将追踪问题看作文字关联的问题。而这样将文字追踪看作detection和tracking (ass">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-28T10:16:47.000Z">
+<meta property="article:modified_time" content="2022-03-04T16:04:37.477Z">
 <meta property="article:author" content="Enming ZHANG">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Zamling BLOG</title>
+  <title>[NOTE]: Text Detection with Online Tracking | Zamling BLOG</title>
   
 
 
@@ -170,242 +173,145 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myself_profile.png">
+      <meta itemprop="name" content="Enming ZHANG">
+      <meta itemprop="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zamling BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NOTE]: Text Detection with Online Tracking
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-28 18:16:47" itemprop="dateCreated datePublished" datetime="2022-02-28T18:16:47+08:00">2022-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-05 00:04:37" itemprop="dateModified" datetime="2022-03-05T00:04:37+08:00">2022-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: Text Detection with Online Tracking" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 23 posts in total. Keep on posting.</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-04T21:06:21+08:00"
-              content="2022-03-04">
-          03-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/04/NOTE-FREE/" itemprop="url">
-            <span itemprop="name">[NOTE]: FREE&YORO</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-28T18:16:47+08:00"
-              content="2022-02-28">
-          02-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/" itemprop="url">
-            <span itemprop="name">[NOTE]: Text Detection with Online Tracking</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-30T11:37:36+08:00"
-              content="2022-01-30">
-          01-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/30/NOTE-CondInst/" itemprop="url">
-            <span itemprop="name">[NOTE]: CondInst</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-28T17:43:27+08:00"
-              content="2022-01-28">
-          01-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/28/NOTE-FCOS/" itemprop="url">
-            <span itemprop="name">[NOTE]: FCOS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-17T21:43:00+08:00"
-              content="2022-01-17">
-          01-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/17/NOTE-EAST/" itemprop="url">
-            <span itemprop="name">[NOTE]: EAST</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-13T11:10:57+08:00"
-              content="2022-01-13">
-          01-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/13/%E7%AE%97%E6%B3%95%E5%BF%83%E5%BE%97/" itemprop="url">
-            <span itemprop="name">算法心得</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-16T20:16:26+08:00"
-              content="2021-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/16/NOTE-DeFCN/" itemprop="url">
-            <span itemprop="name">[NOTE]: DeFCN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T17:16:08+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/NOTE-TSP-DETR/" itemprop="url">
-            <span itemprop="name">[NOTE]: TSP-DETR</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-05T16:14:50+08:00"
-              content="2021-12-05">
-          12-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/05/NOTE-Sparse-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Sparse-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-04T17:50:26+08:00"
-              content="2021-12-04">
-          12-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Traditional Detection Network-1: Fast-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <p>这是一篇较早的文字追踪文章，是百度和自所联合发表的</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>SDE模型。对于视频文字检测，使用tracking的方式可以解决视频文字的一些难题（e.g. motion blur），该文章提出一种end2end的方式，在detection分支，使用ConvLSTM结构来获得空间上的信息。在追踪端，将追踪问题看作文字关联的问题。而这样将文字追踪看作detection和tracking (association)两部分也是大部分文章所使用的方式.</p>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>传统的文字追踪网络通常采用two-step的方法：先在每一帧检测一下，再传入到关联网络中，之前看的那篇Video TextSCM就是采用这样一个方式</p>
+<ul>
+<li>在时间维度上，每一帧图片其实并没有做到充分的训练</li>
+<li>两阶段训练预测，导致额外的计算cost</li>
+<li>容易suboptimal</li>
+</ul>
+<p>所以文章使用ConvLSTM来做检测，企图对图片在时间维度有充分的利用。然后使用appearance-geometry来进行匹配</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>使用ResNet50 + U-Net来做backbone，然后使用EAST的方法来做（生成score map 和 geo map）。然后加上ConvLSTM。detected proposals和当前帧的common features作为descriptor generation输入。descriptor generation的输出进入GRU，然后用上一帧的输出和这一帧GRU的输入做similarity matrix，得到轨迹</p>
+<h3 id="Text-Detection-Branch"><a href="#Text-Detection-Branch" class="headerlink" title="Text Detection Branch"></a>Text Detection Branch</h3><p>backbone + ConvLSTM cell + EAST生成map</p>
+<h3 id="Text-Tracking-Branch"><a href="#Text-Tracking-Branch" class="headerlink" title="Text Tracking Branch"></a>Text Tracking Branch</h3><p>使用NMS来获得top-K个proposals，即k个bbox。然后和feature map（ConvLSTM）的输出共同作为Descriptor Generation的输入，得到相似矩阵后，使用KM算法来获得匹配对</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/30/NOTE-CondInst/" rel="prev" title="[NOTE]: CondInst">
+      <i class="fa fa-chevron-left"></i> [NOTE]: CondInst
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/04/NOTE-FREE/" rel="next" title="[NOTE]: FREE&YORO">
+      [NOTE]: FREE&YORO <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -452,6 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">3.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-Detection-Branch"><span class="nav-number">3.2.</span> <span class="nav-text">Text Detection Branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-Tracking-Branch"><span class="nav-number">3.3.</span> <span class="nav-text">Text Tracking Branch</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -681,6 +588,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
