@@ -199,10 +199,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-03-15 11:56:41 / Modified: 12:02:44" itemprop="dateCreated datePublished" datetime="2022-03-15T11:56:41+08:00">2022-03-15</time>
+              <time title="Created: 2022-03-15 11:56:41" itemprop="dateCreated datePublished" datetime="2022-03-15T11:56:41+08:00">2022-03-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-16 00:22:06" itemprop="dateModified" datetime="2022-03-16T00:22:06+08:00">2022-03-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -246,12 +252,14 @@
 
       
           <p><strong>这个post旨在记录每天写的bug。（正经人谁tm写日记啊 doge</strong></p>
-<h2 id="Pycharm-Evironment-Variables填写错误"><a href="#Pycharm-Evironment-Variables填写错误" class="headerlink" title="Pycharm Evironment Variables填写错误"></a>Pycharm Evironment Variables填写错误</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&#x2F;data1&#x2F;zem&#x2F;DB&#x2F;eval.py&quot;, line 198, in &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File &quot;&#x2F;data1&#x2F;zem&#x2F;DB&#x2F;eval.py&quot;, line 79, in main</span><br><span class="line">    Eval(experiment, experiment_args, cmd&#x3D;args, verbose&#x3D;args[&#39;verbose&#39;]).eval(args[&#39;visualize&#39;])</span><br><span class="line">  File &quot;&#x2F;data1&#x2F;zem&#x2F;DB&#x2F;eval.py&quot;, line 179, in eval</span><br><span class="line">    pred &#x3D; model.forward(batch, training&#x3D;False)</span><br><span class="line">  File &quot;&#x2F;home&#x2F;ailab&#x2F;data1&#x2F;zem&#x2F;DB&#x2F;structure&#x2F;model.py&quot;, line 57, in forward</span><br><span class="line">    pred &#x3D; self.model(data, training&#x3D;self.training)</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;modules&#x2F;module.py&quot;, line 727, in _call_impl</span><br><span class="line">    result &#x3D; self.forward(*input, **kwargs)</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;parallel&#x2F;data_parallel.py&quot;, line 161, in forward</span><br><span class="line">    outputs &#x3D; self.parallel_apply(replicas, inputs, kwargs)</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;parallel&#x2F;data_parallel.py&quot;, line 171, in parallel_apply</span><br><span class="line">    return parallel_apply(replicas, inputs, kwargs, self.device_ids[:len(replicas)])</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;parallel&#x2F;parallel_apply.py&quot;, line 86, in parallel_apply</span><br><span class="line">    output.reraise()</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;_utils.py&quot;, line 428, in reraise</span><br><span class="line">    raise self.exc_type(msg)</span><br><span class="line">TypeError: Caught TypeError in replica 1 on device 1.</span><br><span class="line">Original Traceback (most recent call last):</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;parallel&#x2F;parallel_apply.py&quot;, line 61, in _worker</span><br><span class="line">    output &#x3D; module(*input, **kwargs)</span><br><span class="line">  File &quot;&#x2F;home&#x2F;zem&#x2F;.conda&#x2F;envs&#x2F;zemPy&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;torch&#x2F;nn&#x2F;modules&#x2F;module.py&quot;, line 727, in _call_impl</span><br><span class="line">    result &#x3D; self.forward(*input, **kwargs)</span><br><span class="line">TypeError: forward() missing 1 required positional argument: &#39;data&#39;</span><br></pre></td></tr></table></figure>
-<p><strong>solution</strong></p>
-<p>在Pycharm生命CUDA_VISIBLE的时候，要用分号和前面隔开</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYTHONUNBUFFERED&#x3D;1;CUDA_VISIBLE_DEVICES&#x3D;0</span><br></pre></td></tr></table></figure>
-<p>不是<strong>空格</strong>，原报错的意思就是data和model没有在一个卡上，典型情况就是Pycharm无法运行但script可以</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/15/BUG%E6%97%A5%E8%AE%B0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
