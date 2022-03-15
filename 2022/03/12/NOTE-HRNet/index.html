@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zamling BLOG">
-<meta property="og:url" content="http://example.com/categories/Reading-Notes/index.html">
+  <meta name="description" content="Abstract传统的网络在面对分割或者姿势识别这种需要高分辨率的任务的时候往往会将一个高分辨率的图像转成一个low-resolution的（Resnet，VGG..），然后再恢复高分辨率（U-net）。而HRnet将高分辨率保持了整个过程，其中有两个要点：  将高分辨率转低分辨率的convolution变成平行的 将各个分辨率的信息进行传递">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTE]: HRNet">
+<meta property="og:url" content="http://example.com/2022/03/12/NOTE-HRNet/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+<meta property="og:description" content="Abstract传统的网络在面对分割或者姿势识别这种需要高分辨率的任务的时候往往会将一个高分辨率的图像转成一个low-resolution的（Resnet，VGG..），然后再恢复高分辨率（U-net）。而HRnet将高分辨率保持了整个过程，其中有两个要点：  将高分辨率转低分辨率的convolution变成平行的 将各个分辨率的信息进行传递">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-12T08:43:50.000Z">
+<meta property="article:modified_time" content="2022-03-12T09:21:18.389Z">
 <meta property="article:author" content="Enming ZHANG">
+<meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/Reading-Notes/">
+<link rel="canonical" href="http://example.com/2022/03/12/NOTE-HRNet/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: Reading Notes | Zamling BLOG</title>
+  <title>[NOTE]: HRNet | Zamling BLOG</title>
   
 
 
@@ -170,243 +173,139 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/NOTE-HRNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myself_profile.png">
+      <meta itemprop="name" content="Enming ZHANG">
+      <meta itemprop="description" content="student in Xidian University, Major in telecommunication. machine learning and deep learning enthusiast">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zamling BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NOTE]: HRNet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-12 16:43:50 / Modified: 17:21:18" itemprop="dateCreated datePublished" datetime="2022-03-12T16:43:50+08:00">2022-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index"><span itemprop="name">Reading Notes</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2022/03/12/NOTE-HRNet/" class="post-meta-item leancloud_visitors" data-flag-title="[NOTE]: HRNet" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Reading Notes
-          <small>Category</small>
-        </h2>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2022/03/12/NOTE-HRNet/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/12/NOTE-HRNet/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-12T16:43:50+08:00"
-              content="2022-03-12">
-          03-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/12/NOTE-HRNet/" itemprop="url">
-            <span itemprop="name">[NOTE]: HRNet</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-04T21:06:21+08:00"
-              content="2022-03-04">
-          03-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/04/NOTE-FREE/" itemprop="url">
-            <span itemprop="name">[NOTE]: FREE&YORO</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-28T18:16:47+08:00"
-              content="2022-02-28">
-          02-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/28/NOTE-Text-Detection-with-Online-Tracking/" itemprop="url">
-            <span itemprop="name">[NOTE]: Text Detection with Online Tracking</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-30T11:37:36+08:00"
-              content="2022-01-30">
-          01-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/30/NOTE-CondInst/" itemprop="url">
-            <span itemprop="name">[NOTE]: CondInst</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-28T17:43:27+08:00"
-              content="2022-01-28">
-          01-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/28/NOTE-FCOS/" itemprop="url">
-            <span itemprop="name">[NOTE]: FCOS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-17T21:43:00+08:00"
-              content="2022-01-17">
-          01-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/17/NOTE-EAST/" itemprop="url">
-            <span itemprop="name">[NOTE]: EAST</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-16T20:16:26+08:00"
-              content="2021-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/16/NOTE-DeFCN/" itemprop="url">
-            <span itemprop="name">[NOTE]: DeFCN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-14T17:16:08+08:00"
-              content="2021-12-14">
-          12-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/14/NOTE-TSP-DETR/" itemprop="url">
-            <span itemprop="name">[NOTE]: TSP-DETR</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-05T16:14:50+08:00"
-              content="2021-12-05">
-          12-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/05/NOTE-Sparse-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Sparse-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-04T17:50:26+08:00"
-              content="2021-12-04">
-          12-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/04/NOTE-Traditional-Detection-Network-1-Fast-RCNN/" itemprop="url">
-            <span itemprop="name">[NOTE]: Traditional Detection Network-1: Fast-RCNN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>传统的网络在面对分割或者姿势识别这种需要高分辨率的任务的时候往往会将一个高分辨率的图像转成一个low-resolution的（Resnet，VGG..），然后再恢复高分辨率（U-net）。而HRnet将高分辨率保持了整个过程，其中有两个要点：</p>
+<ul>
+<li>将高分辨率转低分辨率的convolution变成平行的</li>
+<li>将各个分辨率的信息进行传递</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>卷积神经网络的优点就是可以学习到比手动标注更为丰富的信息。HRNet在第n个stage保持了n个streams，代表了n个resolutions，这些streams可以进行信息交互。即和之前串联downsampling的CNN网络不同，HRNet将high-to-low resolution的CNN层进行了并联。所以和UNet不同的是，HRNet是保持一个高分辨率的feature而不是从一个低分辨率的进行恢复，其中</p>
+<ul>
+<li>HRNetV1：仅输出高分辨率的哪个stream的feature</li>
+<li>HRNetV2：将所有的streams进行了融合</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>文章给出的是4-stage的HRNet，第n个stage有n个并行的stream。第n个stream会从前n-1个streams中下采样得到，而在每个stage的最后，每一个stream都会收到其他stream过来的feature进行合并</p>
+<h3 id="Output-Head"><a href="#Output-Head" class="headerlink" title="Output Head"></a>Output Head</h3><p>对于V1来说，仅仅对第一个stream的进行直接的输出。对于V2来说，是将所有stream都upsampling到第一个stream，concat成一个输出。对于V2p（detection）来说，在V2的基础上，对输出在下采样到各个分辨率，得到一个输出list</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Deep-Learning/" rel="tag"># 深度学习-Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/04/NOTE-FREE/" rel="prev" title="[NOTE]: FREE&YORO">
+      <i class="fa fa-chevron-left"></i> [NOTE]: FREE&YORO
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/15/BUG%E6%97%A5%E8%AE%B0/" rel="next" title="BUG日记">
+      BUG日记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/Reading-Notes/page/2/">2</a><a class="extend next" rel="next" href="/categories/Reading-Notes/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -453,6 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Output-Head"><span class="nav-number">3.1.</span> <span class="nav-text">Output Head</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -682,6 +582,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
