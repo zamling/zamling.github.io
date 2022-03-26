@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Introduction of Resnet顾名思义，Resnet.CRNN的backbone是用的Resnet。 Reading Codes本节开始通过阅读源码来分析如何用代码实现Resnet">
+  <meta name="description" content="本post旨在分析项目，研究中所遇到的所有loss及其常见的实现方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Resnet.CRNN Backbone.md">
-<meta property="og:url" content="http://example.com/2021/02/22/Resnet-CRNN-Backbone-md/index.html">
+<meta property="og:title" content="Loss日记">
+<meta property="og:url" content="http://example.com/2022/03/26/Loss%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zamling BLOG">
-<meta property="og:description" content="Introduction of Resnet顾名思义，Resnet.CRNN的backbone是用的Resnet。 Reading Codes本节开始通过阅读源码来分析如何用代码实现Resnet">
+<meta property="og:description" content="本post旨在分析项目，研究中所遇到的所有loss及其常见的实现方法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-22T13:46:59.000Z">
-<meta property="article:modified_time" content="2021-05-26T13:51:40.000Z">
+<meta property="article:published_time" content="2022-03-26T11:01:58.000Z">
+<meta property="article:modified_time" content="2022-03-26T11:44:01.400Z">
 <meta property="article:author" content="Enming ZHANG">
 <meta property="article:tag" content="深度学习-Deep Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/02/22/Resnet-CRNN-Backbone-md/">
+<link rel="canonical" href="http://example.com/2022/03/26/Loss%E6%97%A5%E8%AE%B0/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Resnet.CRNN Backbone.md | Zamling BLOG</title>
+  <title>Loss日记 | Zamling BLOG</title>
   
 
 
@@ -180,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/22/Resnet-CRNN-Backbone-md/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/26/Loss%E6%97%A5%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/myself_profile.png">
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Resnet.CRNN Backbone.md
+          Loss日记
         </h1>
 
         <div class="post-meta">
@@ -202,28 +202,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-02-22 21:46:59" itemprop="dateCreated datePublished" datetime="2021-02-22T21:46:59+08:00">2021-02-22</time>
+              <time title="Created: 2022-03-26 19:01:58 / Modified: 19:44:01" itemprop="dateCreated datePublished" datetime="2022-03-26T19:01:58+08:00">2022-03-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-26 21:51:40" itemprop="dateModified" datetime="2021-05-26T21:51:40+08:00">2021-05-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Project/" itemprop="url" rel="index"><span itemprop="name">Project</span></a>
+                  <a href="/categories/%E5%B0%8F%E9%A3%9F%E7%97%B0%E8%AE%B0%EF%BC%88%E6%97%A5%E8%AE%B0%EF%BC%89/" itemprop="url" rel="index"><span itemprop="name">小食痰记（日记）</span></a>
                 </span>
             </span>
 
           
-            <span id="/2021/02/22/Resnet-CRNN-Backbone-md/" class="post-meta-item leancloud_visitors" data-flag-title="Resnet.CRNN Backbone.md" title="Views">
+            <span id="/2022/03/26/Loss%E6%97%A5%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="Loss日记" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -245,8 +239,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/02/22/Resnet-CRNN-Backbone-md/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/22/Resnet-CRNN-Backbone-md/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/03/26/Loss%E6%97%A5%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/26/Loss%E6%97%A5%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -261,9 +255,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Introduction-of-Resnet"><a href="#Introduction-of-Resnet" class="headerlink" title="Introduction of Resnet"></a>Introduction of Resnet</h1><p>顾名思义，Resnet.CRNN的backbone是用的Resnet。</p>
-<h1 id="Reading-Codes"><a href="#Reading-Codes" class="headerlink" title="Reading Codes"></a>Reading Codes</h1><p>本节开始通过阅读源码来分析如何用代码实现Resnet</p>
-
+        <p>本post旨在分析项目，研究中所遇到的所有loss及其常见的实现方法</p>
+<a id="more"></a>
+<h1 id="CrossEntropy类"><a href="#CrossEntropy类" class="headerlink" title="CrossEntropy类"></a>CrossEntropy类</h1><p>其中包括了多分类的CrossEntropy，二分类的BinaryCrossEntropy，以及对于正负样本不均衡的BalanceCrossEntropy和对于难易样本区分的Focal Loss</p>
+<p>从理论上来说，所有的CrossEntropy都是从一个基础公式改进过来的</p>
+<script type="math/tex; mode=display">
+CE(pt)=-log(pt)</script><p>其中$pt$表示的是与label对应样本的概率，即正确的概率</p>
+<h2 id="nn-CrossEntropy"><a href="#nn-CrossEntropy" class="headerlink" title="nn.CrossEntropy"></a>nn.CrossEntropy</h2><p>这是pytorch中实现多分类的CE的方式，其中有几点需要注意</p>
+<ul>
+<li>pred维度，$(N,C,k1,k2,…)$，其中pred需要过softmax（nn.CrossEntropy包括了，不用额外写）</li>
+<li>target维度$(N,C),(N,k1,k2,…)$，其中值为$[0,C-1]$</li>
+</ul>
+<p>其实就是对$(N,k1,k2,…)$上的所有值计算$-log(pt)$，这里直接返回的就是‘none’时的形状，或者选择sum，mean来输出一个值</p>
+<p>注意：这里的target不需要是one-hot模式，而是直接是index值</p>
+<h2 id="nn-BCELoss"><a href="#nn-BCELoss" class="headerlink" title="nn.BCELoss"></a>nn.BCELoss</h2><p>BinaryCrossEntropy Loss是CrossEntropy的特例，其中$C=1$，也就是只有正类和负类两个类别，同样是对每个$(N,k1,k2)$进行$-log(pt)$的计算，只不过现在target只含有有0和1</p>
+<p>注意：这里因为$C=1$，所以使用Sigmoid进行归一化处理</p>
+<p>注意：对于为什么使用CE而不是MSE的问题中，是因为MSE在过完sigmoid之后导致在0和1附近会导致梯度为0</p>
+<h2 id="Balance-CrossEntropy"><a href="#Balance-CrossEntropy" class="headerlink" title="Balance CrossEntropy"></a>Balance CrossEntropy</h2><p>这里有两个版本，一个是Focal Loss论文中提到的形式$-\alpha_t log(pt)$，还有一种DB中所使用的，即限定负样本的个数在正样本的$\gamma$倍，这里实现仅提到DB中的形式。</p>
+<p>Focal Loss中提到的即$-\alpha_t log(pt)$,其中$\alpha_t$越小，越能抵消多的样本对loss的影响（据说，我并没有验证）</p>
+<p>其中$\alpha_t =\alpha$对于正样本，$\alpha_t = 1-\alpha$对于负样本</p>
+<p>DB中的BCE实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self,</span></span></span><br><span class="line"><span class="function"><span class="params">            pred: torch.Tensor,</span></span></span><br><span class="line"><span class="function"><span class="params">            gt: torch.Tensor,</span></span></span><br><span class="line"><span class="function"><span class="params">            mask: torch.Tensor,</span></span></span><br><span class="line"><span class="function"><span class="params">            return_origin=False</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        pred: shape :math:`(N, 1, H, W)`, the prediction of network</span></span><br><span class="line"><span class="string">        gt: shape :math:`(N, 1, H, W)`, the target</span></span><br><span class="line"><span class="string">        mask: shape :math:`(N, H, W)`, the mask indicates positive regions</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    positive = (gt * mask).byte()</span><br><span class="line">    negative = ((<span class="number">1</span> - gt) * mask).byte()</span><br><span class="line">    positive_count = int(positive.float().sum())</span><br><span class="line">    negative_count = min(int(negative.float().sum()),</span><br><span class="line">                        int(positive_count * self.negative_ratio))</span><br><span class="line">    loss = nn.functional.binary_cross_entropy(</span><br><span class="line">        pred, gt, reduction=<span class="string">&#x27;none&#x27;</span>)[:, <span class="number">0</span>, :, :]</span><br><span class="line">    positive_loss = loss * positive.float()</span><br><span class="line">    negative_loss = loss * negative.float()</span><br><span class="line">    negative_loss, _ = torch.topk(negative_loss.view(<span class="number">-1</span>), negative_count)</span><br><span class="line"></span><br><span class="line">    balance_loss = (positive_loss.sum() + negative_loss.sum()) /\</span><br><span class="line">        (positive_count + negative_count + self.eps)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> return_origin:</span><br><span class="line">        <span class="keyword">return</span> balance_loss, loss</span><br><span class="line">    <span class="keyword">return</span> balance_loss</span><br></pre></td></tr></table></figure>
+<p>很清楚的可以看出分别计算正负样本所对应的point的交叉熵之后（$-log(pt)$），限制了负样本loss的个数</p>
+<h2 id="Focal-Loss"><a href="#Focal-Loss" class="headerlink" title="Focal Loss"></a>Focal Loss</h2><script type="math/tex; mode=display">
+-\alpha_t (1-pt)^\gamma log(pt)</script><p>$\alpha_t$同balance CE中的定义，$\gamma$等于2一般（可调）</p>
+<p>对于多分类</p>
+<script type="math/tex; mode=display">
+-\alpha_c (1-pc)^\gamma log(pc)</script><p>$pc$是该类别的softmax之后的概率</p>
+<p>实现：</p>
+<p>无论对于多分类问题还是二分类问题，都可以使用focal loss，因为$pt$就是对于标签的那个类别的概率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FocalLoss</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, gamma=<span class="number">0</span>, alpha=None, size_average=True</span>):</span></span><br><span class="line">        super(FocalLoss, self).__init__()</span><br><span class="line">        self.gamma = gamma</span><br><span class="line">        self.alpha = alpha</span><br><span class="line">        <span class="keyword">if</span> isinstance(alpha,(float,int,long)): self.alpha = torch.Tensor([alpha,<span class="number">1</span>-alpha])</span><br><span class="line">        <span class="keyword">if</span> isinstance(alpha,list): self.alpha = torch.Tensor(alpha)</span><br><span class="line">        self.size_average = size_average</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input, target</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    input: (N,C,k1,k2...)</span></span><br><span class="line"><span class="string">    target:(N,k1,k2...)</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> input.dim()&gt;<span class="number">2</span>:</span><br><span class="line">            input = input.view(input.size(<span class="number">0</span>),input.size(<span class="number">1</span>),<span class="number">-1</span>)  <span class="comment"># N,C,H,W =&gt; N,C,H*W</span></span><br><span class="line">            input = input.transpose(<span class="number">1</span>,<span class="number">2</span>)    <span class="comment"># N,C,H*W =&gt; N,H*W,C</span></span><br><span class="line">            input = input.contiguous().view(<span class="number">-1</span>,input.size(<span class="number">2</span>))   <span class="comment"># N,H*W,C =&gt; N*H*W,C</span></span><br><span class="line">        target = target.view(<span class="number">-1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        logpt = F.log_softmax(input)</span><br><span class="line">        logpt = logpt.gather(<span class="number">1</span>,target) <span class="comment">#选取target里面index的值（概率），这个概率就是pt</span></span><br><span class="line">        logpt = logpt.view(<span class="number">-1</span>)</span><br><span class="line">        pt = Variable(logpt.data.exp())</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.alpha <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.alpha.type()!=input.data.type():</span><br><span class="line">                self.alpha = self.alpha.type_as(input.data)</span><br><span class="line">            at = self.alpha.gather(<span class="number">0</span>,target.data.view(<span class="number">-1</span>))</span><br><span class="line">            logpt = logpt * Variable(at)</span><br><span class="line"></span><br><span class="line">        loss = <span class="number">-1</span> * (<span class="number">1</span>-pt)**self.gamma * logpt</span><br><span class="line">        <span class="keyword">if</span> self.size_average: <span class="keyword">return</span> loss.mean()</span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">return</span> loss.sum()</span><br></pre></td></tr></table></figure>
+<p>当然，也可以不用torch.gather()方法而通过one-hot进行计算（相当于还是在取当前类别的概率）</p>
+<p><strong>所有的CE类的loss，target都不必要转换one-hot</strong>，但非要转换我也没拦着doge</p>
+<h1 id="Metirc-Loss"><a href="#Metirc-Loss" class="headerlink" title="Metirc Loss"></a>Metirc Loss</h1><p><strong>这里面对target都需要转换one-hot</strong>，即对每一个类都生成一个二分类的map</p>
+<p>pred: $(N,C,k1,k2…)$</p>
+<p>target: $(N,C,k1,k2…)$</p>
+<h2 id="Dice-Loss"><a href="#Dice-Loss" class="headerlink" title="Dice Loss"></a>Dice Loss</h2><p>1-二倍的交并比，是一个类似IoU的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input, target</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">		input tesor of shape = (N, C, H, W)</span></span><br><span class="line"><span class="string">		target tensor of shape = (N, H, W)</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">	<span class="comment"># 先将 target 进行 one-hot 处理，转换为 (N, C, H, W)</span></span><br><span class="line">	nclass = input.shape[<span class="number">1</span>]</span><br><span class="line">	target = one_hot(target.long(), nclass)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">assert</span> input.shape == target.shape, <span class="string">&quot;predict &amp; target shape do not match&quot;</span></span><br><span class="line">	</span><br><span class="line">	binaryDiceLoss = BinaryDiceLoss()</span><br><span class="line">	total_loss = <span class="number">0</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 归一化输出</span></span><br><span class="line">	logits = F.softmax(input, dim=<span class="number">1</span>)</span><br><span class="line">	C = target.shape[<span class="number">1</span>]</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 遍历 channel，得到每个类别的二分类 DiceLoss</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(C):</span><br><span class="line">		dice_loss = binaryDiceLoss(logits[:, i], target[:, i])</span><br><span class="line">		total_loss += dice_loss</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 每个类别的平均 dice_loss</span></span><br><span class="line">	<span class="keyword">return</span> total_loss / C</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="IoU-Loss"><a href="#IoU-Loss" class="headerlink" title="IoU Loss"></a>IoU Loss</h2>
     </div>
 
     
@@ -281,13 +310,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/21/Resnet.CRNN%20Overview-md/" rel="prev" title="Resnet.CRNN Overview.md">
-      <i class="fa fa-chevron-left"></i> Resnet.CRNN Overview.md
+    <a href="/2022/03/18/NOTE-E2TVS/" rel="prev" title="[NOTE]: E2TVS">
+      <i class="fa fa-chevron-left"></i> [NOTE]: E2TVS
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/15/C++%E7%AC%94%E8%AE%B0/" rel="next" title="C++笔记">
-      C++笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -347,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-of-Resnet"><span class="nav-number">1.</span> <span class="nav-text">Introduction of Resnet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reading-Codes"><span class="nav-number">2.</span> <span class="nav-text">Reading Codes</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CrossEntropy%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">CrossEntropy类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nn-CrossEntropy"><span class="nav-number">1.1.</span> <span class="nav-text">nn.CrossEntropy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nn-BCELoss"><span class="nav-number">1.2.</span> <span class="nav-text">nn.BCELoss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Balance-CrossEntropy"><span class="nav-number">1.3.</span> <span class="nav-text">Balance CrossEntropy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Focal-Loss"><span class="nav-number">1.4.</span> <span class="nav-text">Focal Loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Metirc-Loss"><span class="nav-number">2.</span> <span class="nav-text">Metirc Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dice-Loss"><span class="nav-number">2.1.</span> <span class="nav-text">Dice Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU-Loss"><span class="nav-number">2.2.</span> <span class="nav-text">IoU Loss</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
